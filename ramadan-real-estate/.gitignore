@@ -1,0 +1,8 @@
+node_modules
+out
+.env
+
+# Source media stays local — the uploaded footage and its transcript are not
+# committed. Drop them back into public/ before rendering.
+public/source.mp4
+public/captions.srt
