@@ -4,6 +4,10 @@ import { FPS, HouseVideo, MAIN_DURATION, TOTAL_DURATION } from "./Video";
 import { BRAND_TO_ASSET_DURATION, BrandToAsset } from "./BrandToAsset";
 import { FRACTIONAL_HOOK_DURATION, FractionalHook } from "./FractionalHook";
 import {
+  FRACTIONAL_HOOK_GREEN_DURATION,
+  FractionalHookGreen,
+} from "./FractionalHookGreen";
+import {
   FractionalLowerThird,
   LOWER_THIRD_DURATION,
 } from "./FractionalLowerThird";
@@ -40,6 +44,14 @@ export const RemotionRoot: React.FC = () => {
           id="FractionalHook"
           component={FractionalHook}
           durationInFrames={FRACTIONAL_HOOK_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="FractionalHookGreen"
+          component={FractionalHookGreen}
+          durationInFrames={FRACTIONAL_HOOK_GREEN_DURATION}
           fps={FPS}
           width={canvas.width}
           height={canvas.height}
