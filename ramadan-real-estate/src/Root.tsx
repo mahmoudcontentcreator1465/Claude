@@ -7,7 +7,9 @@ import {
   FractionalLowerThird,
   LOWER_THIRD_DURATION,
 } from "./FractionalLowerThird";
+import { AMARINA_NEWS_DURATION, AmarinaNews } from "./AmarinaNews";
 import { HOTEL_HOOK_DURATION, HotelHook } from "./HotelHook";
+import { HOTEL_REALITY_DURATION, HotelReality } from "./HotelReality";
 import { Intro } from "./scenes/Intro";
 import { Main } from "./scenes/Main";
 import { Outro } from "./scenes/Outro";
@@ -64,6 +66,22 @@ export const RemotionRoot: React.FC = () => {
           id="HotelHook"
           component={HotelHook}
           durationInFrames={HOTEL_HOOK_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="AmarinaNews"
+          component={AmarinaNews}
+          durationInFrames={AMARINA_NEWS_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="HotelReality"
+          component={HotelReality}
+          durationInFrames={HOTEL_REALITY_DURATION}
           fps={FPS}
           width={canvas.width}
           height={canvas.height}
