@@ -36,6 +36,8 @@ export const shadow = {
 
 export const font = {
   ar: "PlexArabic",
+  /** The user's chosen Arabic display face. Single weight — never faux-bold it. */
+  arDisplay: "Liftaswash",
   display: "InterTight",
   serif: "InstrumentSerif",
 } as const;

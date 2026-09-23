@@ -19,6 +19,11 @@ await Promise.all([
     weight: "700",
   }),
   loadFont({
+    family: font.arDisplay,
+    url: staticFile("fonts/Liftaswash-Regular.otf"),
+    weight: "400",
+  }),
+  loadFont({
     family: font.display,
     url: staticFile("fonts/InterTight-ExtraBold.ttf"),
     weight: "800",

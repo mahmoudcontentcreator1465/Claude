@@ -1,11 +1,7 @@
 import { Composition, Folder } from "remotion";
 import "./index.css";
-import {
-  FPS,
-  HouseVideo,
-  MAIN_DURATION,
-  TOTAL_DURATION,
-} from "./Video";
+import { FPS, HouseVideo, MAIN_DURATION, TOTAL_DURATION } from "./Video";
+import { BRAND_TO_ASSET_DURATION, BrandToAsset } from "./BrandToAsset";
 import { Intro } from "./scenes/Intro";
 import { Main } from "./scenes/Main";
 import { Outro } from "./scenes/Outro";
@@ -18,6 +14,14 @@ export const RemotionRoot: React.FC = () => {
         id="HouseVideo"
         component={HouseVideo}
         durationInFrames={TOTAL_DURATION}
+        fps={FPS}
+        width={canvas.width}
+        height={canvas.height}
+      />
+      <Composition
+        id="BrandToAsset"
+        component={BrandToAsset}
+        durationInFrames={BRAND_TO_ASSET_DURATION}
         fps={FPS}
         width={canvas.width}
         height={canvas.height}
