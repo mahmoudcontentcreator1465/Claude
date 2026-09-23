@@ -7,6 +7,7 @@ import {
   FractionalLowerThird,
   LOWER_THIRD_DURATION,
 } from "./FractionalLowerThird";
+import { HOTEL_HOOK_DURATION, HotelHook } from "./HotelHook";
 import { Intro } from "./scenes/Intro";
 import { Main } from "./scenes/Main";
 import { Outro } from "./scenes/Outro";
@@ -53,6 +54,16 @@ export const RemotionRoot: React.FC = () => {
           id="ThreeQuestions"
           component={ThreeQuestions}
           durationInFrames={THREE_QUESTIONS_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+      </Folder>
+      <Folder name="Amarina">
+        <Composition
+          id="HotelHook"
+          component={HotelHook}
+          durationInFrames={HOTEL_HOOK_DURATION}
           fps={FPS}
           width={canvas.width}
           height={canvas.height}

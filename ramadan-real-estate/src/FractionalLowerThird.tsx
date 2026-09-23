@@ -1,12 +1,8 @@
-import {
-  AbsoluteFill,
-  interpolate,
-  interpolateColors,
-  useCurrentFrame,
-} from "remotion";
+import { interpolate, interpolateColors, useCurrentFrame } from "remotion";
 import "./fonts";
+import { GreenCard, Headline, type Slide } from "./lib/greenscreen";
 import { progress, sec, travel } from "./lib/motion";
-import { font, gridLine, ink, paper, red } from "./theme";
+import { font, ink, paper, red } from "./theme";
 
 /**
  * Lower-third overlay on green screen for the explainer section:
@@ -16,10 +12,7 @@ import { font, gridLine, ink, paper, red } from "./theme";
  *    وفيه كمان إمكانية للتخارج بعد سنتين حسب شروط البرنامج"
  *
  * Timed against SRT cues 14–29: frame 0 is 00:00:11,500 in the full video.
- *
- * Keying rules: everything outside the card is flat chroma green. No outer
- * shadows, glows, grain or opacity fades on the card's edge — it moves by
- * translate and clip only, so it keys cleanly. Add a drop shadow after keying.
+ * Keying rules live in lib/greenscreen.tsx.
  */
 const T0 = 11.5;
 const at = (srt: number) => sec(srt - T0);
@@ -44,25 +37,12 @@ const CUE = {
 
 export const LOWER_THIRD_DURATION = CUE.end + 18;
 
-export const CHROMA = "#00FF00";
-
-/* Card geometry, canvas px. */
-const CARD = { left: 60, top: 1270, width: 960, height: 470 };
 /* Graphic strip inside the card. */
 const G = { left: 56, top: 186, width: 848, height: 170 };
 const AXIS_Y = 118;
 
 /** Timeline x for year k (0 = now, on the right; 8 on the left). */
 const yearX = (k: number) => G.width - k * (G.width / 8);
-
-type Part = {
-  text: string;
-  at: number;
-  latin?: boolean;
-  accent?: boolean;
-};
-
-type Slide = { at: number; parts: Part[] };
 
 /** Headline slides. Each part pops in on its own cue inside the slide. */
 const HEADLINES: Slide[] = [
@@ -134,79 +114,6 @@ const FOOTNOTES = [
     text: "* حسب شروط البرنامج",
   },
 ];
-
-/**
- * Slides stacked in a clipped window: the current one wipes up in, the
- * previous one wipes up out. No opacity, so nothing half-transparent.
- */
-const SlideStack: React.FC<{
-  frame: number;
-  slides: Slide[];
-  height: number;
-  renderPart: (p: Part, shown: number) => React.ReactNode;
-  justify?: "flex-start" | "center";
-}> = ({ frame, slides, height, renderPart, justify = "flex-start" }) => (
-  <div style={{ position: "relative", height, overflow: "hidden" }}>
-    {slides.map((s, i) => {
-      const next = slides[i + 1];
-      const enter = progress(frame, s.at, s.at + 12);
-      const leave = next ? progress(frame, next.at, next.at + 10) : 0;
-      if (frame < s.at || leave >= 1) return null;
-
-      return (
-        <div
-          key={s.at}
-          dir="rtl"
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: justify,
-            gap: "0.28em",
-            translate: `0px ${(1 - enter) * height - leave * height}px`,
-          }}
-        >
-          {s.parts.map((p) =>
-            frame >= p.at ? (
-              <span
-                key={p.text + p.at}
-                style={{ flexShrink: 0, whiteSpace: "nowrap" }}
-              >
-                {renderPart(p, progress(frame, p.at, p.at + 10))}
-              </span>
-            ) : null,
-          )}
-        </div>
-      );
-    })}
-  </div>
-);
-
-const Headline: React.FC<{ frame: number }> = ({ frame }) => (
-  <SlideStack
-    frame={frame}
-    slides={HEADLINES}
-    height={120}
-    renderPart={(p, shown) => (
-      <span
-        style={{
-          display: "inline-block",
-          fontFamily: p.latin ? font.display : font.arDisplay,
-          fontWeight: p.latin ? 800 : undefined,
-          letterSpacing: p.latin ? "-0.03em" : undefined,
-          fontSize: p.latin ? 74 : 66,
-          lineHeight: 1,
-          color: p.accent ? red.base : ink.full,
-          translate: `0px ${(1 - shown) * 50}px`,
-          clipPath: `inset(0 0 ${(1 - shown) * 100}% 0)`,
-        }}
-      >
-        {p.text}
-      </span>
-    )}
-  />
-);
 
 /** Beats 1–2: the unit bar that splits into ten shares, then collapses into the axis. */
 const UnitBar: React.FC<{ frame: number }> = ({ frame }) => {
@@ -487,113 +394,53 @@ const Timeline: React.FC<{ frame: number }> = ({ frame }) => {
 export const FractionalLowerThird: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const inT = progress(frame, 0, 16);
-  const outT = progress(frame, CUE.end, LOWER_THIRD_DURATION - 2, travel);
-  const slide = (1 - inT) * 120 + outT * 700;
-
-  const tabIn = progress(frame, 6, 18);
-
   return (
-    <AbsoluteFill style={{ backgroundColor: CHROMA }}>
+    <GreenCard
+      frame={frame}
+      tabs={TABS}
+      outFrom={CUE.end}
+      outTo={LOWER_THIRD_DURATION - 2}
+    >
+      <div style={{ position: "absolute", left: 56, right: 56, top: 50 }}>
+        <Headline frame={frame} slides={HEADLINES} />
+      </div>
+
+      {/* Graphic strip. */}
       <div
         style={{
           position: "absolute",
-          left: CARD.left,
-          top: CARD.top,
-          width: CARD.width,
-          height: CARD.height,
-          translate: `0px ${slide}px`,
-          clipPath: `inset(${(1 - inT) * 100}% 0 0 0 round 36px)`,
+          left: G.left,
+          top: G.top,
+          width: G.width,
+          height: G.height,
         }}
       >
-        {/* Card: bone paper with the faint grid. */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: 36,
-            backgroundColor: paper.base,
-            backgroundImage: `linear-gradient(${gridLine} 1px, transparent 1px), linear-gradient(90deg, ${gridLine} 1px, transparent 1px)`,
-            backgroundSize: "32px 32px",
-          }}
-        />
-
-        {/* Headline. */}
-        <div style={{ position: "absolute", left: 56, right: 56, top: 50 }}>
-          <Headline frame={frame} />
-        </div>
-
-        {/* Graphic strip. */}
-        <div
-          style={{
-            position: "absolute",
-            left: G.left,
-            top: G.top,
-            width: G.width,
-            height: G.height,
-          }}
-        >
-          <UnitBar frame={frame} />
-          <Timeline frame={frame} />
-        </div>
-
-        {/* Footnotes — the program's conditions. */}
-        {FOOTNOTES.map((f) => {
-          if (frame < f.from || frame >= f.to) return null;
-          const shown = progress(frame, f.from, f.from + 10);
-          return (
-            <div
-              key={f.text}
-              dir="rtl"
-              style={{
-                position: "absolute",
-                right: 56,
-                bottom: 20,
-                fontFamily: font.arDisplay,
-                fontSize: 32,
-                color: ink.soft,
-                clipPath: `inset(0 0 0 ${(1 - shown) * 100}%)`,
-              }}
-            >
-              {f.text}
-            </div>
-          );
-        })}
+        <UnitBar frame={frame} />
+        <Timeline frame={frame} />
       </div>
 
-      {/* Red tab naming the current beat, riding the card's top edge. */}
-      <div
-        style={{
-          position: "absolute",
-          right: CARD.left + 40,
-          top: CARD.top - 36,
-          height: 72,
-          width: 230,
-          borderRadius: 20,
-          backgroundColor: red.base,
-          translate: `0px ${slide}px`,
-          clipPath: `inset(0 0 0 ${(1 - tabIn) * 100}% round 20px)`,
-        }}
-      >
-        <SlideStack
-          frame={frame}
-          slides={TABS}
-          height={72}
-          justify="center"
-          renderPart={(p) => (
-            <span
-              style={{
-                fontFamily: font.arDisplay,
-                fontSize: 40,
-                lineHeight: 1,
-                color: paper.white,
-              }}
-            >
-              {p.text}
-            </span>
-          )}
-        />
-      </div>
-    </AbsoluteFill>
+      {/* Footnotes — the program's conditions. */}
+      {FOOTNOTES.map((f) => {
+        if (frame < f.from || frame >= f.to) return null;
+        const shown = progress(frame, f.from, f.from + 10);
+        return (
+          <div
+            key={f.text}
+            dir="rtl"
+            style={{
+              position: "absolute",
+              right: 56,
+              bottom: 20,
+              fontFamily: font.arDisplay,
+              fontSize: 32,
+              color: ink.soft,
+              clipPath: `inset(0 0 0 ${(1 - shown) * 100}%)`,
+            }}
+          >
+            {f.text}
+          </div>
+        );
+      })}
+    </GreenCard>
   );
 };
