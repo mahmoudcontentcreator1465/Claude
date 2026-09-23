@@ -34,8 +34,9 @@
 | `motion.ts` | `clamp`, `ease`, `travel`, `rise()` (دخول: opacity + صعود + scale)، `float()` (طفو)، `progress()`، `sec()` (ثواني → فريمات) |
 | `Paper.tsx` | خلفية الورق بالشبكة والبريق والـ grain |
 | `Dissolve.tsx` | fade in/out بين المشاهد |
-| `greenscreen.tsx` | `CHROMA` (#00FF00)، `GreenCard` (كارت تحت + تاب أحمر)، `Headline`، `SlideStack` |
-| `Icon.tsx` | أيقونات خطية (pin, waves, landmark, user, coins, trend) |
+| `greenscreen.tsx` | `CHROMA` (#00FF00)، `GreenCard` (كارت تحت + تاب أحمر)، `Headline`، `SlideStack`، `Layer` (طبقة جرافيك بتدخل وتخرج بمسح) |
+| `Icon.tsx` | أيقونات خطية (pin, waves, landmark, user, coins, trend, lock, calendar, tag, building, file, house, percent, bubble) |
+| `Kicker.tsx` | عنوان صغير بنقطة حمرا |
 
 ### ثغرة اتصلحت
 
@@ -67,6 +68,16 @@
 | `HotelReality` | `amarina-3-hotel-reality.mp4` (9.8ث) | 00:20.566 | "كلمة فندقي مش ضمان… اسأل مين/التكلفة/العائد… نقلة حقيقية ولا لأ؟" |
 
 ملاحظات أمارينا: الكلام على الشاشة ماشي على الـ SRT (مثلاً "مين اللي هيدير" و"نقلة حقيقية")، و"قولّي رأيك في الكومنتات" إضافة مني مش في الكلام.
+
+### فيديو 4 — قرار الفايدة و BTS (SRT رقم 93)
+| Composition | ملف | يتحط عند | الجزء |
+|---|---|---|---|
+| `RateHookGreen` | `rates-1-hook-greenscreen.mp4` (5.9ث) **جرين اسكرين** | 00:00 | "لو مستني الفايدة تقل… القرار ممكن يغيّر حساباتك" — منحنى فايدة نازل لبيت، ثم "قرار جديد" وأرقام بتتلخبط |
+| `RateDecision` | `rates-2-central-bank.mp4` (6.1ث) | 00:07.066 | "البنك المركزي ثبّت الإيداع 19% والإقراض 20%" — كارتين بعدّاد وقفل أحمر |
+| `RateFactorsGreen` | `rates-3-factors-greenscreen.mp4` (6.0ث) **جرين اسكرين** | 00:16.300 | "مش على الفايدة لوحدها… سعر الوحدة، خطة السداد، المشروع" — % متشطبة ثم 4 كروت |
+| `BtsCompare` | `rates-4-bts-compare.mp4` (6.6ث) | 00:21.300 | "BTS بنساعدك تقارن… على أرقام مش كلام مبيعات" — مقارنة 3 فرص + "كلام مبيعات" متشطب |
+
+ملاحظة: درجات المقارنة في BTS توضيحية ومكتوب عليها "* أرقام توضيحية". SRT كتب "الاداء" والصح "الإيداع".
 
 ## قواعد الجرين اسكرين
 

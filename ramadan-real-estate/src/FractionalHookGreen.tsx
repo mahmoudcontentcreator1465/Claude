@@ -1,6 +1,6 @@
 import { interpolate, interpolateColors, useCurrentFrame } from "remotion";
 import "./fonts";
-import { GreenCard, Headline, type Slide } from "./lib/greenscreen";
+import { GreenCard, Headline, Layer, type Slide } from "./lib/greenscreen";
 import { progress, sec, travel } from "./lib/motion";
 import { font, ink, paper, red } from "./theme";
 
@@ -51,35 +51,6 @@ const TABS: Slide[] = [{ at: 0, parts: [{ text: "استثمار", at: 0 }] }];
 
 /* Graphic strip inside the card. */
 const G = { left: 56, top: 186, width: 848, height: 250 };
-
-/**
- * A layer that wipes up into the strip at `from` and up out of it at `to`.
- * Translate and clip only — nothing half-transparent.
- */
-const Layer: React.FC<{
-  frame: number;
-  from: number;
-  to?: number;
-  children: React.ReactNode;
-}> = ({ frame, from, to, children }) => {
-  if (frame < from) return null;
-  const enter = progress(frame, from, from + 14);
-  const leave = to === undefined ? 0 : progress(frame, to, to + 10, travel);
-  if (leave >= 1) return null;
-
-  return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        translate: `0px ${(1 - enter) * 80 - leave * 80}px`,
-        clipPath: `inset(${leave * 100}% 0 ${(1 - enter) * 100}% 0)`,
-      }}
-    >
-      {children}
-    </div>
-  );
-};
 
 /** Beat 1 — the age slider sweeping young → old. */
 const AgeTrack: React.FC<{ frame: number }> = ({ frame }) => {

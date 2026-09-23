@@ -179,3 +179,32 @@ export const GreenCard: React.FC<{
     </AbsoluteFill>
   );
 };
+
+/**
+ * A layer that wipes up into the strip at `from` and up out of it at `to`.
+ * Translate and clip only — nothing half-transparent.
+ */
+export const Layer: React.FC<{
+  frame: number;
+  from: number;
+  to?: number;
+  children: React.ReactNode;
+}> = ({ frame, from, to, children }) => {
+  if (frame < from) return null;
+  const enter = progress(frame, from, from + 14);
+  const leave = to === undefined ? 0 : progress(frame, to, to + 10, travel);
+  if (leave >= 1) return null;
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        translate: `0px ${(1 - enter) * 80 - leave * 80}px`,
+        clipPath: `inset(${leave * 100}% 0 ${(1 - enter) * 100}% 0)`,
+      }}
+    >
+      {children}
+    </div>
+  );
+};

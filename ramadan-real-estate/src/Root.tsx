@@ -14,6 +14,13 @@ import {
 import { AMARINA_NEWS_DURATION, AmarinaNews } from "./AmarinaNews";
 import { HOTEL_HOOK_DURATION, HotelHook } from "./HotelHook";
 import { HOTEL_REALITY_DURATION, HotelReality } from "./HotelReality";
+import { BTS_COMPARE_DURATION, BtsCompare } from "./BtsCompare";
+import { RATE_DECISION_DURATION, RateDecision } from "./RateDecision";
+import {
+  RATE_FACTORS_GREEN_DURATION,
+  RateFactorsGreen,
+} from "./RateFactorsGreen";
+import { RATE_HOOK_GREEN_DURATION, RateHookGreen } from "./RateHookGreen";
 import { Intro } from "./scenes/Intro";
 import { Main } from "./scenes/Main";
 import { Outro } from "./scenes/Outro";
@@ -94,6 +101,40 @@ export const RemotionRoot: React.FC = () => {
           id="HotelReality"
           component={HotelReality}
           durationInFrames={HOTEL_REALITY_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+      </Folder>
+      <Folder name="Rates">
+        <Composition
+          id="RateHookGreen"
+          component={RateHookGreen}
+          durationInFrames={RATE_HOOK_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="RateDecision"
+          component={RateDecision}
+          durationInFrames={RATE_DECISION_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="RateFactorsGreen"
+          component={RateFactorsGreen}
+          durationInFrames={RATE_FACTORS_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="BtsCompare"
+          component={BtsCompare}
+          durationInFrames={BTS_COMPARE_DURATION}
           fps={FPS}
           width={canvas.width}
           height={canvas.height}
