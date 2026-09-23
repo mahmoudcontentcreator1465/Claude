@@ -1,6 +1,5 @@
 import {
   AbsoluteFill,
-  Easing,
   Interactive,
   Sequence,
   interpolate,
@@ -8,8 +7,9 @@ import {
 } from "remotion";
 import "./fonts";
 import { Dissolve } from "./lib/Dissolve";
+import { clamp, ease, float, rise, travel } from "./lib/motion";
 import { Paper } from "./lib/Paper";
-import { EASE, font, ink, paper, red, shadow } from "./theme";
+import { font, ink, paper, red, shadow } from "./theme";
 
 /**
  * Motion graphic for the script beat:
@@ -34,39 +34,6 @@ const LESSON_START = ASSET_START + ASSET_DURATION - DISSOLVE;
 const LESSON_DURATION = 132;
 
 export const BRAND_TO_ASSET_DURATION = LESSON_START + LESSON_DURATION;
-
-const clamp = {
-  extrapolateLeft: "clamp",
-  extrapolateRight: "clamp",
-} as const;
-
-const ease = Easing.bezier(...EASE);
-/** For things travelling between two points — eases both ends. */
-const travel = Easing.bezier(0.65, 0, 0.35, 1);
-
-/** The house entrance: opacity, a 24px rise and 0.94→1 scale over ~21 frames. */
-const rise = (frame: number, start: number, distance = 24) => ({
-  opacity: interpolate(frame, [start, start + 18], [0, 1], {
-    ...clamp,
-    easing: ease,
-  }),
-  translate: `0px ${interpolate(frame, [start, start + 21], [distance, 0], {
-    ...clamp,
-    easing: ease,
-  })}px`,
-  scale: String(
-    interpolate(frame, [start, start + 21], [0.94, 1], {
-      ...clamp,
-      easing: ease,
-    }),
-  ),
-});
-
-/** Slow sine float, 8px over ~90 frames. Returns 0..1 lift for the shadow. */
-const float = (frame: number, phase = 0) => {
-  const s = Math.sin(((frame + phase) / 90) * Math.PI * 2);
-  return { y: s * -8, lift: (s + 1) / 2 };
-};
 
 const Kicker: React.FC<{ frame: number; start: number; children: string }> = ({
   frame,

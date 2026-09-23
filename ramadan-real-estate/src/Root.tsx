@@ -2,9 +2,11 @@ import { Composition, Folder } from "remotion";
 import "./index.css";
 import { FPS, HouseVideo, MAIN_DURATION, TOTAL_DURATION } from "./Video";
 import { BRAND_TO_ASSET_DURATION, BrandToAsset } from "./BrandToAsset";
+import { FRACTIONAL_HOOK_DURATION, FractionalHook } from "./FractionalHook";
 import { Intro } from "./scenes/Intro";
 import { Main } from "./scenes/Main";
 import { Outro } from "./scenes/Outro";
+import { THREE_QUESTIONS_DURATION, ThreeQuestions } from "./ThreeQuestions";
 import { canvas } from "./theme";
 
 export const RemotionRoot: React.FC = () => {
@@ -26,6 +28,24 @@ export const RemotionRoot: React.FC = () => {
         width={canvas.width}
         height={canvas.height}
       />
+      <Folder name="Fractional">
+        <Composition
+          id="FractionalHook"
+          component={FractionalHook}
+          durationInFrames={FRACTIONAL_HOOK_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="ThreeQuestions"
+          component={ThreeQuestions}
+          durationInFrames={THREE_QUESTIONS_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+      </Folder>
       <Folder name="Scenes">
         <Composition
           id="Intro"

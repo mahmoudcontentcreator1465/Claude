@@ -38,7 +38,9 @@ export const Sparkle: React.FC<{
  * The house background: bone-white paper, faint engineering grid, a soft white
  * blow-out at the focal point, red shapes intruding from the corners, grain on top.
  */
-export const Paper: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+export const Paper: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   const frame = useCurrentFrame();
 
   return (

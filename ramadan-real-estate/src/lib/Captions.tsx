@@ -35,7 +35,8 @@ const buildPages = (captions: Caption[]): Page[] => {
     const current = pages[pages.length - 1];
     const previous = current?.cues[current.cues.length - 1];
     const merged = current
-      ? current.cues.reduce((n, c) => n + c.text.length + 1, 0) + cue.text.length
+      ? current.cues.reduce((n, c) => n + c.text.length + 1, 0) +
+        cue.text.length
       : Infinity;
 
     if (
