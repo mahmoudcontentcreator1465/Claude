@@ -6,3 +6,6 @@ out
 # committed. Drop them back into public/ before rendering.
 public/source.mp4
 public/captions.srt
+
+# Enhanced master of the airport footage — derived from source media, stays local.
+public/airport/
