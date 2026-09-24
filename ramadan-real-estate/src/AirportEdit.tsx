@@ -9,25 +9,92 @@ import {
 import "./fonts";
 import { Icon } from "./lib/Icon";
 import { clamp, ease, float, progress } from "./lib/motion";
-import { Paper } from "./lib/Paper";
-import { font, ink, paper, red, shadow } from "./theme";
+import { Audio } from "@remotion/media";
+import { font } from "./theme";
+
+/**
+ * This edit has its own look, on purpose — not the house paper/red style:
+ * deep Nile blue, warm sand cards, a sunset-orange accent.
+ */
+const C = {
+  night: "#0A2A43",
+  night2: "#11446A",
+  sand: "#F6E8CB",
+  sandDeep: "#E8D2A4",
+  navy: "#0A1F33",
+  muted: "#6E5C43",
+  faint: "rgba(10,31,51,0.28)",
+  sun: "#FF6A2B",
+  white: "#FFFFFF",
+} as const;
+
+const shadow = {
+  float: "0 36px 70px rgba(4,16,28,0.35), 0 6px 16px rgba(4,16,28,0.2)",
+  card: "0 18px 40px rgba(4,16,28,0.28)",
+  contact: "0 2px 8px rgba(4,16,28,0.2)",
+} as const;
+
+/** The cutaway backdrop: Nile-blue gradient, a dot pattern and a low sun. */
+const NightBackdrop: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => (
+  <AbsoluteFill
+    style={{
+      background: `linear-gradient(165deg, ${C.night} 0%, ${C.night2} 100%)`,
+    }}
+  >
+    <AbsoluteFill
+      style={{
+        backgroundImage:
+          "radial-gradient(rgba(255,255,255,0.07) 2px, transparent 2.5px)",
+        backgroundSize: "34px 34px",
+      }}
+    />
+    <div
+      style={{
+        position: "absolute",
+        right: -220,
+        top: -160,
+        width: 720,
+        height: 720,
+        borderRadius: "50%",
+        background:
+          "radial-gradient(circle, rgba(255,106,43,0.55) 0%, rgba(255,106,43,0) 65%)",
+      }}
+    />
+    <div
+      style={{
+        position: "absolute",
+        left: -260,
+        bottom: -300,
+        width: 760,
+        height: 760,
+        borderRadius: "50%",
+        background:
+          "radial-gradient(circle, rgba(246,232,203,0.14) 0%, rgba(246,232,203,0) 65%)",
+      }}
+    />
+    {children}
+  </AbsoluteFill>
+);
 
 /**
  * Full edit of the airport testimonial (IMG_9277): guests from the US on
- * their driver, Bando.
+ * their driver, Bondok.
  *
  * Source: public/airport/master.mp4 — the enhanced master (1080×1920, 30fps,
  * denoised, sharpened, graded, loudness-normalised to -14 LUFS). It stays
  * local; rebuild it with the ffmpeg command in HANDOFF.md.
  *
- * All times below are in source seconds from the supplied SRT.
+ * All times below are in source seconds from the supplied SRT. The edit
+ * opens on her "hi" (8.18s, found from the audio envelope).
  */
 const FPS = 30;
 const f = (s: number) => Math.round(s * FPS);
 
 /** The kept parts of the take. Cut: the pre-roll, "um you know", "and yeah it's just so". */
 const SEGMENTS = [
-  { from: 8.8, to: 13.633, zoom: [1.0, 1.05] },
+  { from: 8.18, to: 13.633, zoom: [1.0, 1.06] },
   { from: 14.366, to: 31.666, zoom: [1.12, 1.18] },
   { from: 33.3, to: 37.433, zoom: [1.04, 1.1] },
 ] as const;
@@ -62,7 +129,7 @@ const out = (src: number) => {
 
 /** Short punch-ins on the lines that matter, on top of each segment's push. */
 const PUNCHES = [
-  { at: 10.2, amount: 0.07 }, // "Bando is an amazing driver"
+  { at: 10.2, amount: 0.07 }, // "Bondok is an amazing driver"
   { at: 22.233, amount: 0.05 }, // "keep us safe"
   { at: 34.5, amount: 0.06 }, // "we had so much fun"
 ];
@@ -71,7 +138,7 @@ const Footage: React.FC = () => {
   const frame = useCurrentFrame();
 
   return (
-    <AbsoluteFill style={{ backgroundColor: ink.full }}>
+    <AbsoluteFill style={{ backgroundColor: C.navy }}>
       {SEGMENTS.map((s, i) => {
         const start = SEG_START[i];
         const len = f(s.to - s.from);
@@ -140,12 +207,13 @@ const Footage: React.FC = () => {
 type Cue = { from: number; to: number; en: string; ar: string; key?: string };
 
 const CUES: Cue[] = [
+  { from: 8.18, to: 8.8, en: "Hi!", ar: "هاي!" },
   { from: 8.8, to: 10.2, en: "We're from the US", ar: "إحنا من أمريكا" },
   {
     from: 10.2,
     to: 11.833,
-    en: "Bando is an amazing driver",
-    ar: "باندو سواق رائع",
+    en: "Bondok is an amazing driver",
+    ar: "بندق سواق رائع",
     key: "amazing",
   },
   {
@@ -246,7 +314,7 @@ const CaptionLine: React.FC<{ cue: Cue }> = ({ cue }) => {
           maxWidth: 940,
           padding: "22px 34px 20px",
           borderRadius: 30,
-          backgroundColor: "rgba(245,243,240,0.96)",
+          backgroundColor: "rgba(10,31,51,0.9)",
           boxShadow: shadow.card,
           textAlign: "center",
           scale: String(interpolate(pop, [0, 1], [0.94, 1])),
@@ -260,7 +328,7 @@ const CaptionLine: React.FC<{ cue: Cue }> = ({ cue }) => {
             fontSize: 60,
             lineHeight: 1.08,
             letterSpacing: "-0.02em",
-            color: ink.full,
+            color: C.white,
           }}
         >
           {words.map((w, i) => {
@@ -272,8 +340,8 @@ const CaptionLine: React.FC<{ cue: Cue }> = ({ cue }) => {
                 style={{
                   display: "inline-block",
                   marginInline: "0.14em",
-                  color: isKey ? red.base : ink.full,
-                  opacity: on ? 1 : 0.18,
+                  color: isKey ? C.sun : C.white,
+                  opacity: on ? 1 : 0.28,
                   translate: `0px ${on ? 0 : 6}px`,
                 }}
               >
@@ -289,7 +357,7 @@ const CaptionLine: React.FC<{ cue: Cue }> = ({ cue }) => {
             fontFamily: font.arDisplay,
             fontSize: 40,
             lineHeight: 1.3,
-            color: ink.soft,
+            color: C.sandDeep,
           }}
         >
           {cue.ar}
@@ -360,7 +428,7 @@ const Pill: React.FC<{
         gap: 16,
         padding: "16px 28px",
         borderRadius: 999,
-        backgroundColor: paper.base,
+        backgroundColor: C.sand,
         boxShadow: shadow.float,
         opacity: inT * (1 - outT),
         scale: String(interpolate(inT, [0, 1], [0.7, 1]) - outT * 0.1),
@@ -378,7 +446,7 @@ const HookTitle: React.FC = () => {
   const start = out(10.2);
   const end = out(13.633) - 4;
   if (frame > end + 10) return null;
-  const inT = progress(frame, 2, 14);
+  const inT = progress(frame, out(8.8), out(8.8) + 12);
   const word = progress(frame, start, start + 10);
   const outT = progress(frame, end, end + 10);
 
@@ -391,7 +459,7 @@ const HookTitle: React.FC = () => {
         right: 70,
         padding: "34px 40px 30px",
         borderRadius: 40,
-        backgroundColor: paper.base,
+        backgroundColor: C.sand,
         boxShadow: shadow.float,
         rotate: "-2deg",
         opacity: inT * (1 - outT),
@@ -407,7 +475,7 @@ const HookTitle: React.FC = () => {
           fontWeight: 800,
           fontSize: 30,
           letterSpacing: "0.18em",
-          color: ink.soft,
+          color: C.muted,
         }}
       >
         <div
@@ -415,7 +483,7 @@ const HookTitle: React.FC = () => {
             width: 14,
             height: 14,
             borderRadius: "50%",
-            backgroundColor: red.base,
+            backgroundColor: C.sun,
           }}
         />
         GUESTS FROM THE US
@@ -428,19 +496,20 @@ const HookTitle: React.FC = () => {
           fontSize: 92,
           letterSpacing: "-0.035em",
           lineHeight: 1,
-          color: ink.full,
+          color: C.navy,
         }}
       >
         “An{" "}
         <span
           style={{
-            fontFamily: font.serif,
-            fontStyle: "italic",
-            fontWeight: 400,
-            fontSize: 112,
-            letterSpacing: 0,
-            color: red.base,
-            opacity: word,
+            fontFamily: font.display,
+            fontWeight: 800,
+            fontSize: 91,
+            textDecoration: "underline",
+            textDecorationThickness: 8,
+            textUnderlineOffset: 10,
+            color: C.sun,
+            opacity: 0.45 + 0.55 * word,
           }}
         >
           amazing
@@ -451,7 +520,7 @@ const HookTitle: React.FC = () => {
   );
 };
 
-/** Name tag for Bando, low on the frame, while he is introduced. */
+/** Name tag for Bondok, low on the frame, while he is introduced. */
 const NameTag: React.FC = () => (
   <Pill start={out(10.2)} end={out(13.633)} style={{ right: 70, bottom: 620 }}>
     <div
@@ -459,7 +528,7 @@ const NameTag: React.FC = () => (
         width: 16,
         height: 16,
         borderRadius: "50%",
-        backgroundColor: red.base,
+        backgroundColor: C.sun,
       }}
     />
     <span
@@ -467,20 +536,21 @@ const NameTag: React.FC = () => (
         fontFamily: font.display,
         fontWeight: 800,
         fontSize: 44,
-        color: ink.full,
+        color: C.navy,
       }}
     >
-      Bando
+      Bondok
     </span>
     <span
       style={{
-        fontFamily: font.serif,
-        fontStyle: "italic",
-        fontSize: 44,
-        color: ink.soft,
+        fontFamily: font.display,
+        fontWeight: 800,
+        fontSize: 30,
+        letterSpacing: "0.14em",
+        color: C.muted,
       }}
     >
-      the driver
+      THE DRIVER
     </span>
   </Pill>
 );
@@ -511,7 +581,7 @@ const Checklist: React.FC = () => {
         width: 600,
         padding: "28px 30px",
         borderRadius: 36,
-        backgroundColor: paper.base,
+        backgroundColor: C.sand,
         boxShadow: shadow.float,
         rotate: "-2deg",
         opacity: inT * (1 - outT),
@@ -524,11 +594,11 @@ const Checklist: React.FC = () => {
           fontWeight: 800,
           fontSize: 30,
           letterSpacing: "0.16em",
-          color: ink.soft,
+          color: C.muted,
           marginBottom: 14,
         }}
       >
-        WHY BANDO
+        WHY BONDOK
       </div>
       {QUALITIES.map((q) => {
         const on = progress(frame, out(q.at), out(q.at) + 12);
@@ -549,14 +619,14 @@ const Checklist: React.FC = () => {
                 height: 54,
                 flexShrink: 0,
                 borderRadius: 14,
-                backgroundColor: on > 0.5 ? red.base : "transparent",
-                border: `4px solid ${on > 0.5 ? red.base : ink.faint}`,
+                backgroundColor: on > 0.5 ? C.sun : "transparent",
+                border: `4px solid ${on > 0.5 ? C.sun : C.faint}`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <Icon size={34} color={paper.white} stroke={3}>
+              <Icon size={34} color={C.white} stroke={3}>
                 {check}
               </Icon>
             </div>
@@ -565,7 +635,7 @@ const Checklist: React.FC = () => {
                 fontFamily: font.display,
                 fontWeight: 800,
                 fontSize: 44,
-                color: ink.full,
+                color: C.navy,
                 letterSpacing: "-0.02em",
               }}
             >
@@ -606,7 +676,7 @@ const FunSticker: React.FC = () => {
         style={{
           padding: "26px 50px 30px",
           borderRadius: 40,
-          backgroundColor: paper.base,
+          backgroundColor: C.sand,
           boxShadow: shadow.float,
           rotate: `${interpolate(inT, [0, 1], [-14, -5])}deg`,
           scale: String(interpolate(inT, [0, 1], [1.5, 1])),
@@ -615,19 +685,20 @@ const FunSticker: React.FC = () => {
           fontWeight: 800,
           fontSize: 96,
           letterSpacing: "-0.035em",
-          color: ink.full,
+          color: C.navy,
           whiteSpace: "nowrap",
         }}
       >
         So much{" "}
         <span
           style={{
-            fontFamily: font.serif,
-            fontStyle: "italic",
-            fontWeight: 400,
-            fontSize: 124,
-            letterSpacing: 0,
-            color: red.base,
+            fontFamily: font.display,
+            fontWeight: 800,
+            fontSize: 101,
+            textDecoration: "underline",
+            textDecorationThickness: 8,
+            textUnderlineOffset: 10,
+            color: C.sun,
           }}
         >
           fun
@@ -666,7 +737,7 @@ const CutawayWipe: React.FC<{ len: number; children: React.ReactNode }> = ({
         clipPath: `inset(${outT * 100}% 0 ${(1 - inT) * 100}% 0 round ${40 * (1 - inT) + 40 * outT}px)`,
       }}
     >
-      <Paper>{children}</Paper>
+      <NightBackdrop>{children}</NightBackdrop>
     </AbsoluteFill>
   );
 };
@@ -684,7 +755,7 @@ const CutKicker: React.FC<{ children: string }> = ({ children }) => {
         fontWeight: 800,
         fontSize: 32,
         letterSpacing: "0.18em",
-        color: ink.soft,
+        color: C.sandDeep,
         opacity: progress(frame, 4, 14),
       }}
     >
@@ -693,7 +764,7 @@ const CutKicker: React.FC<{ children: string }> = ({ children }) => {
           width: 14,
           height: 14,
           borderRadius: "50%",
-          backgroundColor: red.base,
+          backgroundColor: C.sun,
         }}
       />
       {children}
@@ -730,7 +801,7 @@ const FloatCard: React.FC<{
           position: "absolute",
           inset: 0,
           borderRadius: 44,
-          backgroundColor: ink.full,
+          backgroundColor: C.navy,
           opacity: 0.11 - lift * 0.03,
           filter: `blur(${30 + lift * 10}px)`,
           transform: `translate(${36 + lift * 8}px, ${60 + lift * 12}px) rotate(${tilt}deg)`,
@@ -741,7 +812,7 @@ const FloatCard: React.FC<{
           position: "absolute",
           inset: 0,
           borderRadius: 44,
-          backgroundColor: paper.lift,
+          backgroundColor: C.sand,
           boxShadow: shadow.contact,
           transform: `translateY(${y}px) rotate(${tilt}deg)`,
           display: "flex",
@@ -751,7 +822,7 @@ const FloatCard: React.FC<{
           gap: 26,
         }}
       >
-        <Icon size={150} color={accent ? red.base : ink.full} stroke={1.6}>
+        <Icon size={150} color={accent ? C.sun : C.navy} stroke={1.6}>
           {icon}
         </Icon>
         <div
@@ -760,7 +831,7 @@ const FloatCard: React.FC<{
             fontWeight: 800,
             fontSize: 70,
             letterSpacing: "-0.03em",
-            color: accent ? red.base : ink.full,
+            color: accent ? C.sun : C.navy,
           }}
         >
           {label}
@@ -791,7 +862,7 @@ const CultureInsert: React.FC = () => {
             fontSize: 104,
             letterSpacing: "-0.04em",
             lineHeight: 1,
-            color: ink.full,
+            color: C.sand,
             opacity: progress(frame, 2, 14),
           }}
         >
@@ -800,12 +871,13 @@ const CultureInsert: React.FC = () => {
           it&apos;s{" "}
           <span
             style={{
-              fontFamily: font.serif,
-              fontStyle: "italic",
-              fontWeight: 400,
-              fontSize: 132,
-              letterSpacing: 0,
-              color: red.base,
+              fontFamily: font.display,
+              fontWeight: 800,
+              fontSize: 108,
+              textDecoration: "underline",
+              textDecorationThickness: 8,
+              textUnderlineOffset: 10,
+              color: C.sun,
               opacity: diff,
             }}
           >
@@ -871,19 +943,20 @@ const MapInsert: React.FC = () => {
             fontSize: 104,
             letterSpacing: "-0.04em",
             lineHeight: 1,
-            color: ink.full,
+            color: C.sand,
             opacity: progress(frame, 2, 14),
           }}
         >
           Knows where to{" "}
           <span
             style={{
-              fontFamily: font.serif,
-              fontStyle: "italic",
-              fontWeight: 400,
-              fontSize: 132,
-              letterSpacing: 0,
-              color: red.base,
+              fontFamily: font.display,
+              fontWeight: 800,
+              fontSize: 108,
+              textDecoration: "underline",
+              textDecorationThickness: 8,
+              textUnderlineOffset: 10,
+              color: C.sun,
               opacity: go,
             }}
           >
@@ -898,7 +971,7 @@ const MapInsert: React.FC = () => {
               position: "absolute",
               inset: 0,
               borderRadius: 48,
-              backgroundColor: ink.full,
+              backgroundColor: C.navy,
               opacity: 0.1 - lift * 0.03,
               filter: `blur(${34 + lift * 10}px)`,
               transform: `translate(${40 + lift * 8}px, ${64 + lift * 12}px) rotate(-3deg)`,
@@ -910,7 +983,7 @@ const MapInsert: React.FC = () => {
               width: 920,
               height: 820,
               borderRadius: 48,
-              backgroundColor: paper.lift,
+              backgroundColor: C.sand,
               boxShadow: shadow.contact,
               transform: `translateY(${y}px) rotate(-3deg)`,
               overflow: "hidden",
@@ -942,7 +1015,7 @@ const MapInsert: React.FC = () => {
               <path
                 d={ROUTE}
                 fill="none"
-                stroke={red.base}
+                stroke={C.sun}
                 strokeWidth={12}
                 strokeLinecap="round"
                 pathLength={1}
@@ -972,7 +1045,7 @@ const MapInsert: React.FC = () => {
                       height: 92,
                       borderRadius: "50% 50% 50% 0",
                       rotate: "-45deg",
-                      backgroundColor: ink.full,
+                      backgroundColor: C.navy,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -985,7 +1058,7 @@ const MapInsert: React.FC = () => {
                         fontFamily: font.display,
                         fontWeight: 800,
                         fontSize: 46,
-                        color: paper.white,
+                        color: C.white,
                       }}
                     >
                       {i + 1}
@@ -996,7 +1069,7 @@ const MapInsert: React.FC = () => {
             })}
             {/* The car at the start of the route. */}
             <div style={{ position: "absolute", left: 40, top: 660 }}>
-              <Icon size={90} color={red.base} stroke={1.8}>
+              <Icon size={90} color={C.sun} stroke={1.8}>
                 {car}
               </Icon>
             </div>
@@ -1013,7 +1086,7 @@ const MapInsert: React.FC = () => {
   );
 };
 
-/** The last beat: a thank-you card on the house paper. */
+/** The last beat: a thank-you card on the Nile-blue backdrop. */
 const EndCard: React.FC = () => {
   const frame = useCurrentFrame();
   const { y, lift } = float(frame);
@@ -1021,7 +1094,7 @@ const EndCard: React.FC = () => {
   const name = progress(frame, 8, 22);
 
   return (
-    <Paper>
+    <NightBackdrop>
       <AbsoluteFill
         style={{
           justifyContent: "center",
@@ -1035,7 +1108,7 @@ const EndCard: React.FC = () => {
               position: "absolute",
               inset: 0,
               borderRadius: 48,
-              backgroundColor: ink.full,
+              backgroundColor: C.navy,
               opacity: 0.1 - lift * 0.03,
               filter: `blur(${34 + lift * 10}px)`,
               transform: `translate(${44 + lift * 8}px, ${70 + lift * 12}px) rotate(-4deg)`,
@@ -1047,7 +1120,7 @@ const EndCard: React.FC = () => {
               width: 860,
               padding: "70px 60px",
               borderRadius: 48,
-              backgroundColor: paper.lift,
+              backgroundColor: C.sand,
               boxShadow: shadow.contact,
               transform: `translateY(${y + (1 - inT) * 60}px) rotate(-4deg)`,
               opacity: inT,
@@ -1061,23 +1134,24 @@ const EndCard: React.FC = () => {
                 fontSize: 120,
                 letterSpacing: "-0.04em",
                 lineHeight: 1,
-                color: ink.full,
+                color: C.navy,
               }}
             >
               Thank you,
             </div>
             <div
               style={{
-                fontFamily: font.serif,
-                fontStyle: "italic",
-                fontSize: 170,
+                fontFamily: font.display,
+                fontWeight: 800,
+                fontSize: 150,
+                letterSpacing: "-0.04em",
                 lineHeight: 1.05,
-                color: red.base,
+                color: C.sun,
                 opacity: name,
                 translate: `0px ${(1 - name) * 20}px`,
               }}
             >
-              Bando
+              Bondok
             </div>
             <div
               dir="rtl"
@@ -1085,21 +1159,38 @@ const EndCard: React.FC = () => {
                 marginTop: 20,
                 fontFamily: font.arDisplay,
                 fontSize: 60,
-                color: ink.soft,
+                color: C.muted,
                 opacity: name,
               }}
             >
-              شكرًا يا باندو
+              شكرًا يا بندق
             </div>
           </div>
         </div>
       </AbsoluteFill>
-    </Paper>
+    </NightBackdrop>
   );
 };
 
+/** Music bed: low under the voice, lifting for the end card, out at the end. */
+const musicVolume = (frame: number) =>
+  interpolate(
+    frame,
+    [
+      0,
+      12,
+      FOOTAGE_END - 6,
+      FOOTAGE_END + 10,
+      AIRPORT_EDIT_DURATION - 24,
+      AIRPORT_EDIT_DURATION,
+    ],
+    [0, 0.14, 0.14, 0.5, 0.5, 0],
+    clamp,
+  );
+
 export const AirportEdit: React.FC = () => (
-  <AbsoluteFill style={{ backgroundColor: ink.full }}>
+  <AbsoluteFill style={{ backgroundColor: C.navy }}>
+    <Audio src={staticFile("airport/music.wav")} volume={musicVolume} />
     <Sequence durationInFrames={FOOTAGE_END} name="Footage">
       <Footage />
     </Sequence>

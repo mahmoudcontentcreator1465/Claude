@@ -79,18 +79,22 @@
 
 ملاحظة: درجات المقارنة في BTS توضيحية ومكتوب عليها "* أرقام توضيحية". SRT كتب "الاداء" والصح "الإيداع".
 
-### فيديو 5 — مونتاج كامل: شهادة سياح عن السواق "باندو" (IMG_9277 + SRT إنجليزي)
-- Composition: `AirportEdit` (`src/AirportEdit.tsx`) → `renders/airport-bando-final.mp4` (28.8ث). **مش مرفوع على git** لأنه فيه الفوتيج الأصلي.
-- الفوتيج المحسّن `public/airport/master.mp4` (local، مش على git). يتعمل تاني بـ ffmpeg كامل من PyPI:
+### فيديو 5 — مونتاج كامل: شهادة سياح عن السواق "بندق" (IMG_9277 + SRT إنجليزي)
+- Composition: `AirportEdit` (`src/AirportEdit.tsx`) → `renders/airport-bondok-final.mp4` (29.4ث) ونسخة للإرسال `-send.mp4` (<30MB). **مش مرفوعين على git** لأنهم فيهم الفوتيج الأصلي.
+- **الاسم: بندق (Bondok)** — الـ SRT كتبه غلط "Bando".
+- **ستايل خاص بالفيديو ده بس** (بطلب المستخدم، مش القاعدة): خلفية أزرق نيلي بنقط وشمس برتقالي، كروت لون رمل، لون مميز برتقالي `#FF6A2B`، ترجمة في كبسولة كحلي. من غير ورق/شبكة/أحمر ومن غير الـ serif المايل. الباليتة `C` جوه الملف.
+- يبدأ من "hi" عند 8.18ث (اتحدد من شكل الصوت، مش من الـ SRT).
+- ميوزك: `scripts/airport_music.py` بيولّد تراك (100 BPM، A major، 32ث) → `public/airport/music.wav` (local). مستواه 0.14 تحت الكلام و0.5 في كارت النهاية.
+- الفوتيج المحسّن `public/airport/master.mp4` (local). يتعمل تاني بـ ffmpeg كامل من PyPI:
   ```
-  pip install imageio-ffmpeg   # ffmpeg الموجود مع Remotion ناقصه فلاتر
+  pip install imageio-ffmpeg numpy   # ffmpeg الموجود مع Remotion ناقصه فلاتر
   FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
   $FF -i IMG_9277.MP4 -vf "hqdn3d=1.5:1.5:4:4,scale=1080:1920:flags=lanczos,cas=0.45,eq=contrast=1.06:saturation=1.12:gamma=0.98,vibrance=intensity=0.12,fps=30" \
       -af "highpass=f=80,afftdn=nf=-28:nr=10,acompressor=threshold=-20dB:ratio=3:attack=10:release=150:makeup=2,loudnorm=I=-14:TP=-1.5:LRA=9" \
       -c:v libx264 -preset slow -crf 16 -pix_fmt yuv420p -c:a aac -b:a 192k -ar 48000 public/airport/master.mp4
+  python3 scripts/airport_music.py public/airport/music.wav
   ```
-- المونتاج: قص البداية والـ "um" والتكرار، زوم متبادل يخفي القطعات + punch-ins، ترجمة إنجليزي + عربي، هوك "An *amazing* driver"، اسم "Bando the driver"، قائمة WHY BANDO، مشهدين جرافيك كاملين (الثقافة/الأكل/السواقة + خريطة "Knows where to go")، "So much fun"، كارت "Thank you, Bando".
-- الرندر النهائي: `npx remotion render AirportEdit renders/airport-bando-final.mp4 --crf=16 --audio-bitrate=192k`.
+- الرندر: `npx remotion render AirportEdit renders/airport-bondok-final.mp4 --crf=16 --audio-bitrate=192k`، وبعدين إعادة ضغط crf 19 للإرسال (حد الإرسال 30MB).
 - مفيش تفريغ صوت هنا (HuggingFace/OpenAI محجوبين)، فلازم SRT من المستخدم.
 
 ## قواعد الجرين اسكرين
