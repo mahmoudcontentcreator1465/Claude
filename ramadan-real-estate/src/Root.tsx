@@ -22,6 +22,26 @@ import {
 } from "./RateFactorsGreen";
 import { RATE_HOOK_GREEN_DURATION, RateHookGreen } from "./RateHookGreen";
 import { AIRPORT_EDIT_DURATION, AirportEdit } from "./AirportEdit";
+import {
+  HAJJ_CHOICES_DURATION,
+  HAJJ_PROOF_DURATION,
+  HAJJ_QUESTIONS_DURATION,
+  HajjChoices,
+  HajjProof,
+  HajjQuestions,
+} from "./HajjFull";
+import {
+  DIFFERENT_GREEN_DURATION,
+  DifferentGreen,
+  HAJJ_AD_GREEN_DURATION,
+  HAJJ_CTA_GREEN_DURATION,
+  HAJJ_HOOK_GREEN_DURATION,
+  HAJJ_REASSURE_GREEN_DURATION,
+  HajjAdGreen,
+  HajjCtaGreen,
+  HajjHookGreen,
+  HajjReassureGreen,
+} from "./HajjGreen";
 import { Intro } from "./scenes/Intro";
 import { Main } from "./scenes/Main";
 import { Outro } from "./scenes/Outro";
@@ -149,6 +169,72 @@ export const RemotionRoot: React.FC = () => {
         width={canvas.width}
         height={canvas.height}
       />
+      <Folder name="Hajj">
+        <Composition
+          id="HajjHookGreen"
+          component={HajjHookGreen}
+          durationInFrames={HAJJ_HOOK_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="HajjChoices"
+          component={HajjChoices}
+          durationInFrames={HAJJ_CHOICES_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="HajjReassureGreen"
+          component={HajjReassureGreen}
+          durationInFrames={HAJJ_REASSURE_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="HajjQuestions"
+          component={HajjQuestions}
+          durationInFrames={HAJJ_QUESTIONS_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="HajjAdGreen"
+          component={HajjAdGreen}
+          durationInFrames={HAJJ_AD_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="DifferentGreen"
+          component={DifferentGreen}
+          durationInFrames={DIFFERENT_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="HajjProof"
+          component={HajjProof}
+          durationInFrames={HAJJ_PROOF_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="HajjCtaGreen"
+          component={HajjCtaGreen}
+          durationInFrames={HAJJ_CTA_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+      </Folder>
       <Folder name="Scenes">
         <Composition
           id="Intro"

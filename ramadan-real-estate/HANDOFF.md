@@ -97,6 +97,25 @@
 - الرندر: `npx remotion render AirportEdit renders/airport-go2cairo-final.mp4 --crf=16 --audio-bitrate=192k`، وبعدين إعادة ضغط crf 19 للإرسال (حد الإرسال 30MB).
 - مفيش تفريغ صوت هنا (HuggingFace/OpenAI محجوبين)، فلازم SRT من المستخدم.
 
+### فيديو 6 — Different: وكالات الحج والعمرة (SRT e12cbecb)
+**ستايل خاص بالفيديو ده بس** (بطلب المستخدم): بيج وبني ودرجاتهم، مش ستايل العقارات. الملفات في `src/hajj/`:
+- `theme.ts`: الباليتة (رملي `#F1E6D3`، بني قهوة `#3A2718`، كراميل `#9C5B2E`، تان `#C9A273`) و`starTile()` (نقشة نجمة ثمانية بدل الشبكة).
+- `style.tsx`: `GreenCard` (كارت رملي بإطار داخلي وتاب على شكل قوس في النص)، `Headline` (مسح من الشمال لليمين)، `Backdrop` (خلفية متدرجة بنقشة ونجوم كبيرة بتلف وإطار قوس)، `Kicker` (معين بني وخط)، `Star`.
+- المشاهد في `src/HajjGreen.tsx` و`src/HajjFull.tsx`، وفيها الكلمة المميزة بلون `brown` (import `accent as brown`).
+
+| Composition | ملف | يتحط عند | النوع |
+|---|---|---|---|
+| `HajjHookGreen` | `hajj-1-hook-greenscreen.mp4` | 00:00 | جرين: "بتبيع ثقة" |
+| `HajjChoices` | `hajj-2-choices.mp4` | 00:04.433 | عادي: مئات البرامج + "الأفضل" على كل كارت |
+| `HajjReassureGreen` | `hajj-3-reassure-greenscreen.mp4` | 00:10.866 | جرين: قلقان ← مطمن |
+| `HajjQuestions` | `hajj-4-questions.mp4` | 00:13.633 | عادي: أسئلة العميل |
+| `HajjAdGreen` | `hajj-5-ad-greenscreen.mp4` | 00:20.333 | جرين: صورة وسعر "مش كفاية" |
+| `DifferentGreen` | `hajj-6-different-greenscreen.mp4` | 00:23.500 | جرين: Different + الخدمة + العملاء |
+| `HajjProof` | `hajj-7-proof.mp4` | 00:32.400 | عادي: 400% |
+| `HajjCtaGreen` | `hajj-8-cta-greenscreen.mp4` | 00:35.000 | جرين: ابعتلنا رسالة |
+
+ملاحظات: الـ SRT كاتب "Differnt" واتكتبت Different. الأسعار على الكروت توضيحية، و400% رقم العميل.
+
 ## قواعد الجرين اسكرين
 
 - الخلفية `#00FF00` صريحة، والجرافيك في كارت في آخر الشاشة (تقريباً من y≈1235 لـ 1740).
