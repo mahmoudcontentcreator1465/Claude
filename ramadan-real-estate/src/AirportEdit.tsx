@@ -80,7 +80,8 @@ const NightBackdrop: React.FC<{ children?: React.ReactNode }> = ({
 
 /**
  * Full edit of the airport testimonial (IMG_9277): guests from the US on
- * their driver, Bondok.
+ * their Go2Cairo driver. At the user's request the driver is named only as
+ * "Go2Cairo Driver" on screen.
  *
  * Source: public/airport/master.mp4 — the enhanced master (1080×1920, 30fps,
  * denoised, sharpened, graded, loudness-normalised to -14 LUFS). It stays
@@ -129,7 +130,7 @@ const out = (src: number) => {
 
 /** Short punch-ins on the lines that matter, on top of each segment's push. */
 const PUNCHES = [
-  { at: 10.2, amount: 0.07 }, // "Bondok is an amazing driver"
+  { at: 10.2, amount: 0.07 }, // "…is an amazing driver"
   { at: 22.233, amount: 0.05 }, // "keep us safe"
   { at: 34.5, amount: 0.06 }, // "we had so much fun"
 ];
@@ -212,8 +213,8 @@ const CUES: Cue[] = [
   {
     from: 10.2,
     to: 11.833,
-    en: "Bondok is an amazing driver",
-    ar: "بندق سواق رائع",
+    en: "The Go2Cairo Driver is amazing",
+    ar: "سواق Go2Cairo رائع",
     key: "amazing",
   },
   {
@@ -360,7 +361,22 @@ const CaptionLine: React.FC<{ cue: Cue }> = ({ cue }) => {
             color: C.sandDeep,
           }}
         >
-          {cue.ar}
+          {cue.ar.split(/(Go2Cairo)/).map((part, i) =>
+            part === "Go2Cairo" ? (
+              <span
+                key={i}
+                style={{
+                  fontFamily: font.display,
+                  fontWeight: 800,
+                  fontSize: 34,
+                }}
+              >
+                {part}
+              </span>
+            ) : (
+              part
+            ),
+          )}
         </div>
       </div>
     </AbsoluteFill>
@@ -520,7 +536,7 @@ const HookTitle: React.FC = () => {
   );
 };
 
-/** Name tag for Bondok, low on the frame, while he is introduced. */
+/** Name tag for the Go2Cairo driver, low on the frame, while he is introduced. */
 const NameTag: React.FC = () => (
   <Pill start={out(10.2)} end={out(13.633)} style={{ right: 70, bottom: 620 }}>
     <div
@@ -539,7 +555,7 @@ const NameTag: React.FC = () => (
         color: C.navy,
       }}
     >
-      Bondok
+      Go2Cairo
     </span>
     <span
       style={{
@@ -550,7 +566,7 @@ const NameTag: React.FC = () => (
         color: C.muted,
       }}
     >
-      THE DRIVER
+      DRIVER
     </span>
   </Pill>
 );
@@ -598,7 +614,7 @@ const Checklist: React.FC = () => {
           marginBottom: 14,
         }}
       >
-        WHY BONDOK
+        WHY GO2CAIRO
       </div>
       {QUALITIES.map((q) => {
         const on = progress(frame, out(q.at), out(q.at) + 12);
@@ -1137,13 +1153,13 @@ const EndCard: React.FC = () => {
                 color: C.navy,
               }}
             >
-              Thank you,
+              Thanks,
             </div>
             <div
               style={{
                 fontFamily: font.display,
                 fontWeight: 800,
-                fontSize: 150,
+                fontSize: 140,
                 letterSpacing: "-0.04em",
                 lineHeight: 1.05,
                 color: C.sun,
@@ -1151,19 +1167,7 @@ const EndCard: React.FC = () => {
                 translate: `0px ${(1 - name) * 20}px`,
               }}
             >
-              Bondok
-            </div>
-            <div
-              dir="rtl"
-              style={{
-                marginTop: 20,
-                fontFamily: font.arDisplay,
-                fontSize: 60,
-                color: C.muted,
-                opacity: name,
-              }}
-            >
-              شكرًا يا بندق
+              Go2Cairo
             </div>
           </div>
         </div>

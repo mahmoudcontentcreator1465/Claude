@@ -79,9 +79,9 @@
 
 ملاحظة: درجات المقارنة في BTS توضيحية ومكتوب عليها "* أرقام توضيحية". SRT كتب "الاداء" والصح "الإيداع".
 
-### فيديو 5 — مونتاج كامل: شهادة سياح عن السواق "بندق" (IMG_9277 + SRT إنجليزي)
-- Composition: `AirportEdit` (`src/AirportEdit.tsx`) → `renders/airport-bondok-final.mp4` (29.4ث) ونسخة للإرسال `-send.mp4` (<30MB). **مش مرفوعين على git** لأنهم فيهم الفوتيج الأصلي.
-- **الاسم: بندق (Bondok)** — الـ SRT كتبه غلط "Bando".
+### فيديو 5 — مونتاج كامل: شهادة سياح عن سواق Go2Cairo (IMG_9277 + SRT إنجليزي)
+- Composition: `AirportEdit` (`src/AirportEdit.tsx`) → `renders/airport-go2cairo-final.mp4` (29.4ث) ونسخة للإرسال `-send.mp4` (<30MB). **مش مرفوعين على git** لأنهم فيهم الفوتيج الأصلي.
+- **الاسم على الشاشة: "Go2Cairo Driver"** (بطلب المستخدم، بدل اسم السواق "بندق"). كارت النهاية: "Thanks, Go2Cairo" بس، من غير سطر عربي. في السطر العربي للترجمة كلمة Go2Cairo بتتكتب بـ Inter Tight لأن الفونت العربي مفيهوش حروف لاتيني.
 - **ستايل خاص بالفيديو ده بس** (بطلب المستخدم، مش القاعدة): خلفية أزرق نيلي بنقط وشمس برتقالي، كروت لون رمل، لون مميز برتقالي `#FF6A2B`، ترجمة في كبسولة كحلي. من غير ورق/شبكة/أحمر ومن غير الـ serif المايل. الباليتة `C` جوه الملف.
 - يبدأ من "hi" عند 8.18ث (اتحدد من شكل الصوت، مش من الـ SRT).
 - ميوزك: `scripts/airport_music.py` بيولّد تراك (100 BPM، A major، 32ث) → `public/airport/music.wav` (local). مستواه 0.14 تحت الكلام و0.5 في كارت النهاية.
@@ -94,7 +94,7 @@
       -c:v libx264 -preset slow -crf 16 -pix_fmt yuv420p -c:a aac -b:a 192k -ar 48000 public/airport/master.mp4
   python3 scripts/airport_music.py public/airport/music.wav
   ```
-- الرندر: `npx remotion render AirportEdit renders/airport-bondok-final.mp4 --crf=16 --audio-bitrate=192k`، وبعدين إعادة ضغط crf 19 للإرسال (حد الإرسال 30MB).
+- الرندر: `npx remotion render AirportEdit renders/airport-go2cairo-final.mp4 --crf=16 --audio-bitrate=192k`، وبعدين إعادة ضغط crf 19 للإرسال (حد الإرسال 30MB).
 - مفيش تفريغ صوت هنا (HuggingFace/OpenAI محجوبين)، فلازم SRT من المستخدم.
 
 ## قواعد الجرين اسكرين
