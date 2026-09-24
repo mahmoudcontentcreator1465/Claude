@@ -79,6 +79,20 @@
 
 ملاحظة: درجات المقارنة في BTS توضيحية ومكتوب عليها "* أرقام توضيحية". SRT كتب "الاداء" والصح "الإيداع".
 
+### فيديو 5 — مونتاج كامل: شهادة سياح عن السواق "باندو" (IMG_9277 + SRT إنجليزي)
+- Composition: `AirportEdit` (`src/AirportEdit.tsx`) → `renders/airport-bando-final.mp4` (28.8ث). **مش مرفوع على git** لأنه فيه الفوتيج الأصلي.
+- الفوتيج المحسّن `public/airport/master.mp4` (local، مش على git). يتعمل تاني بـ ffmpeg كامل من PyPI:
+  ```
+  pip install imageio-ffmpeg   # ffmpeg الموجود مع Remotion ناقصه فلاتر
+  FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
+  $FF -i IMG_9277.MP4 -vf "hqdn3d=1.5:1.5:4:4,scale=1080:1920:flags=lanczos,cas=0.45,eq=contrast=1.06:saturation=1.12:gamma=0.98,vibrance=intensity=0.12,fps=30" \
+      -af "highpass=f=80,afftdn=nf=-28:nr=10,acompressor=threshold=-20dB:ratio=3:attack=10:release=150:makeup=2,loudnorm=I=-14:TP=-1.5:LRA=9" \
+      -c:v libx264 -preset slow -crf 16 -pix_fmt yuv420p -c:a aac -b:a 192k -ar 48000 public/airport/master.mp4
+  ```
+- المونتاج: قص البداية والـ "um" والتكرار، زوم متبادل يخفي القطعات + punch-ins، ترجمة إنجليزي + عربي، هوك "An *amazing* driver"، اسم "Bando the driver"، قائمة WHY BANDO، مشهدين جرافيك كاملين (الثقافة/الأكل/السواقة + خريطة "Knows where to go")، "So much fun"، كارت "Thank you, Bando".
+- الرندر النهائي: `npx remotion render AirportEdit renders/airport-bando-final.mp4 --crf=16 --audio-bitrate=192k`.
+- مفيش تفريغ صوت هنا (HuggingFace/OpenAI محجوبين)، فلازم SRT من المستخدم.
+
 ## قواعد الجرين اسكرين
 
 - الخلفية `#00FF00` صريحة، والجرافيك في كارت في آخر الشاشة (تقريباً من y≈1235 لـ 1740).

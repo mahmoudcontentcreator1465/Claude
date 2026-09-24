@@ -21,6 +21,7 @@ import {
   RateFactorsGreen,
 } from "./RateFactorsGreen";
 import { RATE_HOOK_GREEN_DURATION, RateHookGreen } from "./RateHookGreen";
+import { AIRPORT_EDIT_DURATION, AirportEdit } from "./AirportEdit";
 import { Intro } from "./scenes/Intro";
 import { Main } from "./scenes/Main";
 import { Outro } from "./scenes/Outro";
@@ -140,6 +141,14 @@ export const RemotionRoot: React.FC = () => {
           height={canvas.height}
         />
       </Folder>
+      <Composition
+        id="AirportEdit"
+        component={AirportEdit}
+        durationInFrames={AIRPORT_EDIT_DURATION}
+        fps={FPS}
+        width={canvas.width}
+        height={canvas.height}
+      />
       <Folder name="Scenes">
         <Composition
           id="Intro"

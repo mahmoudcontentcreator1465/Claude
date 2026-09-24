@@ -9,3 +9,5 @@ public/captions.srt
 
 # Enhanced master of the airport footage — derived from source media, stays local.
 public/airport/
+# Final edits that contain the source footage stay local too.
+renders/airport-*
