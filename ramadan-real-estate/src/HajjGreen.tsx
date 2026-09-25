@@ -5,6 +5,7 @@ import { GreenCard, Headline, Layer } from "./hajj/style";
 import { Icon, paths } from "./lib/Icon";
 import { float, progress, sec, travel } from "./lib/motion";
 import { accent as brown, font, ink, paper, tan } from "./hajj/theme";
+import { SfxTrack } from "./hajj/sfx";
 
 /**
  * Green-screen lower thirds for the Hajj & Umrah agency reel (Different).
@@ -228,6 +229,20 @@ export const HajjHookGreen: React.FC = () => {
           </div>
         </Layer>
       </Strip>
+      <SfxTrack
+        cues={[
+          { at: 0, name: "whoosh", volume: 0.8 },
+          { at: 6, name: "pop" },
+          { at: H1.hajj, name: "swipe" },
+          { at: H1.hajj + 2, name: "pop" },
+          { at: H1.notTrip, name: "swipe" },
+          { at: H1.notTrip + 4, name: "pop" },
+          { at: H1.notTrip + 16, name: "strike" },
+          { at: H1.trust - 6, name: "swipe" },
+          { at: H1.trust + 4, name: "chime" },
+          { at: H1_OUT, name: "whoosh", volume: 0.6 },
+        ]}
+      />
     </GreenCard>
   );
 };
@@ -360,6 +375,16 @@ export const HajjReassureGreen: React.FC = () => {
           </div>
         </Layer>
       </Strip>
+      <SfxTrack
+        cues={[
+          { at: 0, name: "whoosh", volume: 0.8 },
+          { at: 4, name: "pop" },
+          { at: H2.reassure, name: "swipe" },
+          { at: H2.reassure, name: "slide" },
+          { at: H2.reassure + 20, name: "chime" },
+          { at: H2_OUT, name: "whoosh", volume: 0.6 },
+        ]}
+      />
     </GreenCard>
   );
 };
@@ -491,6 +516,15 @@ export const HajjAdGreen: React.FC = () => {
           </div>
         ) : null}
       </Strip>
+      <SfxTrack
+        cues={[
+          { at: 0, name: "whoosh", volume: 0.8 },
+          { at: H3.ad - 4, name: "pop" },
+          { at: H3.ad, name: "swipe" },
+          { at: H3.notEnough, name: "stamp" },
+          { at: H3_OUT, name: "whoosh", volume: 0.6 },
+        ]}
+      />
     </GreenCard>
   );
 };
@@ -710,6 +744,28 @@ export const DifferentGreen: React.FC = () => {
           </div>
         </Layer>
       </Strip>
+      <SfxTrack
+        cues={[
+          { at: 0, name: "whoosh", volume: 0.8 },
+          { at: 4, name: "pop" },
+          { at: 8, name: "chime", volume: 0.7 },
+          { at: H4.help, name: "swipe" },
+          { at: H4.see, name: "swipe" },
+          { at: H4.see + 4, name: "pop" },
+          { at: H4.see + 12, name: "pop" },
+          { at: H4.see + 20, name: "pop" },
+          { at: H4.convinced, name: "swipe" },
+          { at: H4.convinced + 6, name: "ding", volume: 0.8 },
+          { at: H4.proof, name: "whoosh", volume: 0.7 },
+          { at: H4.clients, name: "pop", volume: 0.6 },
+          { at: H4.clients + 4, name: "pop", volume: 0.6 },
+          { at: H4.clients + 8, name: "pop", volume: 0.6 },
+          { at: H4.clients + 12, name: "pop", volume: 0.6 },
+          { at: H4.clients + 16, name: "pop", volume: 0.6 },
+          { at: H4.tourism, name: "impact", volume: 0.8 },
+          { at: H4_OUT, name: "whoosh", volume: 0.6 },
+        ]}
+      />
     </GreenCard>
   );
 };
@@ -894,6 +950,21 @@ export const HajjCtaGreen: React.FC = () => {
           </div>
         </Layer>
       </Strip>
+      <SfxTrack
+        cues={[
+          { at: 0, name: "whoosh", volume: 0.8 },
+          { at: 4, name: "pop" },
+          { at: H5.how, name: "swipe" },
+          { at: H5.message, name: "send" },
+          { at: H5.message + 4, name: "pop" },
+          { at: H5.reply, name: "key" },
+          { at: H5.reply + 5, name: "key" },
+          { at: H5.reply + 10, name: "key" },
+          { at: H5.reply + 15, name: "key" },
+          { at: H5.reply + 18, name: "ding" },
+          { at: H5_OUT, name: "whoosh", volume: 0.6 },
+        ]}
+      />
     </GreenCard>
   );
 };

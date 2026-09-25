@@ -4,6 +4,7 @@ import { Icon, paths } from "./lib/Icon";
 import { Backdrop, Kicker } from "./hajj/style";
 import { clamp, float, progress, rise, sec, travel } from "./lib/motion";
 import { accent as brown, font, ink, paper, shadow, tan } from "./hajj/theme";
+import { SfxTrack } from "./hajj/sfx";
 
 /**
  * Full-frame inserts for the Hajj & Umrah agency reel (Different), in the
@@ -241,6 +242,26 @@ export const HajjChoices: React.FC = () => {
           ))}
         </div>
       </AbsoluteFill>
+      <SfxTrack
+        cues={[
+          { at: 0, name: "whoosh", volume: 0.7 },
+          { at: A.hundreds, name: "whoosh", volume: 0.7 },
+          { at: A.hundreds, name: "tick", volume: 0.6 },
+          { at: A.hundreds + 3, name: "tick", volume: 0.6 },
+          { at: A.hundreds + 6, name: "tick", volume: 0.6 },
+          { at: A.hundreds + 9, name: "tick", volume: 0.6 },
+          { at: A.hundreds + 12, name: "tick", volume: 0.6 },
+          { at: A.hundreds + 15, name: "tick", volume: 0.6 },
+          { at: A.hundreds + 18, name: "tick", volume: 0.6 },
+          { at: A.hundreds + 21, name: "tick", volume: 0.6 },
+          { at: A.hundreds + 24, name: "tick", volume: 0.6 },
+          { at: A.hotels, name: "pop" },
+          { at: A.prices, name: "pop" },
+          { at: A.companies, name: "pop" },
+          { at: A.best, name: "stamp" },
+          { at: A.best + 9, name: "stamp", volume: 0.5 },
+        ]}
+      />
     </Backdrop>
   );
 };
@@ -404,6 +425,16 @@ export const HajjQuestions: React.FC = () => {
           })}
         </div>
       </AbsoluteFill>
+      <SfxTrack
+        cues={[
+          { at: 0, name: "swipe" },
+          { at: 4, name: "pop" },
+          { at: B.q2, name: "pop" },
+          { at: B.q3, name: "pop" },
+          { at: B.q4, name: "pop" },
+          { at: B.q4b, name: "chime", volume: 0.7 },
+        ]}
+      />
     </Backdrop>
   );
 };
@@ -524,6 +555,14 @@ export const HajjProof: React.FC = () => {
           {bar("بعد", 650, after, true)}
         </div>
       </AbsoluteFill>
+      <SfxTrack
+        cues={[
+          { at: 0, name: "whoosh", volume: 0.7 },
+          { at: 6, name: "pop" },
+          { at: Cc.pct - 4, name: "riser" },
+          { at: Cc.pct + 22, name: "impact", volume: 0.8 },
+        ]}
+      />
     </Backdrop>
   );
 };

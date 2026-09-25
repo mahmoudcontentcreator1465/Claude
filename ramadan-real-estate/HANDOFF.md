@@ -114,6 +114,8 @@
 | `HajjProof` | `hajj-7-proof.mp4` | 00:32.400 | عادي: 400% |
 | `HajjCtaGreen` | `hajj-8-cta-greenscreen.mp4` | 00:35.000 | جرين: ابعتلنا رسالة |
 
+**ساوند افيكتس** (بطلب المستخدم: احترافية ومش مزعجة): `scripts/hajj_sfx.py` بيولّد الأصوات بـ numpy (whoosh, swipe, pop, tick, key, stamp, chime, ding, strike, send, riser, impact, slide) → `public/hajj/sfx/` ومرفوعة على git. `src/hajj/sfx.tsx` فيه `SfxTrack` واللي بياخد `{at, name, volume}`، وكل مشهد فيه قايمة cues مربوطة بتوقيتات الـ SRT. أعلى مستوى حوالي −10 dB عشان يفضل تحت الصوت.
+
 ملاحظات: الـ SRT كاتب "Differnt" واتكتبت Different. الأسعار على الكروت توضيحية، و400% رقم العميل.
 
 ## قواعد الجرين اسكرين
