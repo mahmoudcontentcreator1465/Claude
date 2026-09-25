@@ -15,9 +15,9 @@ import { SfxTrack } from "./hajj/sfx";
  */
 
 /** Graphic strip inside the card. */
-const G = { left: 56, top: 186, width: 848, height: 250 };
+export const G = { left: 56, top: 186, width: 848, height: 250 };
 
-const Strip: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+export const Strip: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div
     style={{
       position: "absolute",
@@ -32,14 +32,14 @@ const Strip: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </div>
 );
 
-const Top: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+export const Top: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div style={{ position: "absolute", left: 56, right: 56, top: 50 }}>
     {children}
   </div>
 );
 
 /** A white chip with an icon and a label, popping up from a baseline clip. */
-const Chip: React.FC<{
+export const Chip: React.FC<{
   frame: number;
   at: number;
   icon: React.ReactNode;
@@ -86,7 +86,7 @@ const Chip: React.FC<{
 };
 
 /** A brown strike that wipes across its parent. */
-const Strike: React.FC<{ frame: number; at: number; top?: string }> = ({
+export const Strike: React.FC<{ frame: number; at: number; top?: string }> = ({
   frame,
   at,
   top = "50%",
