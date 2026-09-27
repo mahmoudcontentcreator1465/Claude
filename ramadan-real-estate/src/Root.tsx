@@ -1,4 +1,5 @@
 import { Composition, Folder } from "remotion";
+import { ABU_KHALED_GREEN_DURATION, AbuKhaledGreen } from "./AbuKhaledGreen";
 import { TRAVEL_HOOK_GREEN_DURATION, TravelHookGreen } from "./TravelGreen";
 import {
   TOURIST_TIPS_GREEN_DURATION,
@@ -253,6 +254,14 @@ export const RemotionRoot: React.FC = () => {
           id="TouristTipsGreen"
           component={TouristTipsGreen}
           durationInFrames={TOURIST_TIPS_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="AbuKhaledGreen"
+          component={AbuKhaledGreen}
+          durationInFrames={ABU_KHALED_GREEN_DURATION}
           fps={FPS}
           width={canvas.width}
           height={canvas.height}
