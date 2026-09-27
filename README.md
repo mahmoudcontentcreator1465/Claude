@@ -21,12 +21,15 @@ Node 20.9+ is required.
 
 ## Deploying to Vercel
 
-1. Import the repository in Vercel and set **Root Directory** to `different-portfolio`.
-   The framework preset (Next.js), build command and output are detected automatically.
-2. Add environment variables from `.env.example` (Production and Preview as needed):
-   - `NEXT_PUBLIC_SITE_URL`: the final domain, e.g. `https://www.different.agency`.
-   - `SHOW_DRAFT_CONTENT=true` **on Preview only** if you want to review drafts there.
-3. Deploy. Preview deployments are automatically `noindex` via `robots.txt`.
+The site lives at the repository root, and `vercel.json` pins the Next.js framework and build
+commands, so the Vercel project needs no special settings (leave **Root Directory** empty).
+`.vercelignore` keeps the repository's other projects (`ramadan-real-estate/`, `.agents/`) out of the upload.
+
+1. Push a branch: every pull request gets a Preview deployment automatically.
+2. Preview deployments show Draft / Pending content (with badges) so it can be reviewed;
+   Production never does. Previews are also `noindex` via `robots.txt`.
+3. Before launch, add `NEXT_PUBLIC_SITE_URL` (the final domain, e.g. `https://www.different.agency`)
+   and, when ready, the contact-form variables from `.env.example`.
 
 ## Content model (no component changes needed)
 
@@ -43,7 +46,7 @@ All content lives in `src/content/`:
 Every item has a `status`:
 
 - `published`: live everywhere.
-- `draft` / `pending`: visible only in `npm run dev` or when `SHOW_DRAFT_CONTENT=true`, always
+- `draft` / `pending`: visible only in `npm run dev`, on Vercel Preview deployments, or with `SHOW_DRAFT_CONTENT=true`, always
   with a visible *Draft* / *Pending* badge. Hidden on the live site.
 
 Navigation, the sitemap, the home page section numbers and the contact form's service list all

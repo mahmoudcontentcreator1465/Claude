@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Other projects that share this repository.
+    "ramadan-real-estate/**",
+    ".agents/**",
+    ".claude/**",
   ]),
 ]);
 

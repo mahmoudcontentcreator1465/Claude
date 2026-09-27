@@ -5,9 +5,21 @@ import { clients } from "@/content/clients";
 import { services } from "@/content/services";
 import type { CaseStudy, Client, ContentStatus, Service } from "@/content/types";
 
-/** Drafts are shown in development, and in any deployment with SHOW_DRAFT_CONTENT=true. */
+/**
+ * Drafts (pending clients, unconfirmed services, placeholder case studies) are shown:
+ * - in development,
+ * - on Vercel *Preview* deployments, so the site can be reviewed before content is confirmed,
+ * - anywhere SHOW_DRAFT_CONTENT=true.
+ * They are never shown on Vercel Production. SHOW_DRAFT_CONTENT=false hides them everywhere.
+ */
 export const showDrafts =
-  process.env.SHOW_DRAFT_CONTENT === "true" || process.env.NODE_ENV === "development";
+  process.env.SHOW_DRAFT_CONTENT === "false"
+    ? false
+    : process.env.VERCEL_ENV === "production"
+      ? process.env.SHOW_DRAFT_CONTENT === "true"
+      : process.env.SHOW_DRAFT_CONTENT === "true" ||
+        process.env.NODE_ENV === "development" ||
+        process.env.VERCEL_ENV === "preview";
 
 export const isVisible = (status: ContentStatus) => status === "published" || showDrafts;
 export const isDraft = (status: ContentStatus) => status !== "published";
