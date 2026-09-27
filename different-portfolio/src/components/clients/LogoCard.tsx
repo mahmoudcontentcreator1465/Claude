@@ -12,11 +12,14 @@ export function LogoCard({
   name,
   badge,
   sizes = "(min-width: 1280px) 18vw, (min-width: 768px) 28vw, 45vw",
+  priority = false,
 }: {
   client: Client;
   name: string;
   badge?: string;
   sizes?: string;
+  /** Load eagerly with high priority (first row above the fold). */
+  priority?: boolean;
 }) {
   const { image, treatment, zoom } = client.logo;
   const surface =
@@ -35,6 +38,7 @@ export function LogoCard({
               alt={`${name} logo`}
               fill
               sizes={sizes}
+              priority={priority}
               className="object-contain transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.03]"
               style={zoom ? { scale: String(zoom) } : undefined}
             />

@@ -33,10 +33,13 @@ export async function ClientsSection({ index = "03", limit, as = "h2" }: { index
       ) : (
         <ul className="mt-14 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:mt-20 md:gap-x-6 lg:grid-cols-4 xl:grid-cols-5">
           {shown.map((c, i) => (
-            <Reveal as="li" key={c.id} delay={(i % 5) * 0.06}>
+            // On the clients page the first rows are above the fold: animate them with CSS on load
+            // rather than waiting for the scroll observer, so they paint (and count for LCP) immediately.
+            <Reveal as="li" key={c.id} delay={(as === "h1" && i < 10 ? 0.25 : 0) + (i % 5) * 0.06} onLoad={as === "h1" && i < 10}>
               <LogoCard
                 client={c}
                 name={clientName(c, locale)}
+                priority={as === "h1" && i < 5}
                 badge={isDraft(c.status) ? (c.status === "pending" ? tc("pending") : tc("draft")) : undefined}
               />
             </Reveal>
