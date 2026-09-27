@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "siteName": "Different",
+    "defaultTitle": "Different — Creative marketing for travel & tourism",
+    "titleTemplate": "%s · Different",
+    "description": "Different is a creative marketing agency for travel and tourism brands: campaigns, content and ideas that bring destinations closer to the people they want to reach.",
+    "home": "Creative marketing for travel & tourism",
+    "about": "About",
+    "aboutDescription": "Different is a creative marketing agency for travel and tourism brands. Different ideas, different experiences, different results.",
+    "clients": "Our clients",
+    "clientsDescription": "Travel agencies, tour operators and tourism brands Different has worked with.",
+    "work": "Our work",
+    "workDescription": "Selected campaigns, content and creative projects by Different for travel and tourism brands.",
+    "services": "Services",
+    "servicesDescription": "How Different helps travel and tourism brands get noticed, remembered and booked.",
+    "contact": "Contact",
+    "contactDescription": "Tell Different about your travel or tourism brand and where you want to take it next."
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "home": "Different home page",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "footerNav": "Footer navigation",
+    "language": "Choose language",
+    "newTab": "opens in a new tab"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "clients": "Our Clients",
+    "work": "Our Work",
+    "services": "Services",
+    "contact": "Contact",
+    "cta": "Let's Talk"
+  },
+  "lang": {
+    "en": "EN",
+    "ar": "AR",
+    "enLong": "English",
+    "arLong": "العربية"
+  },
+  "common": {
+    "draft": "Draft",
+    "pending": "Pending",
+    "tbc": "TBC",
+    "placeholderNote": "Placeholder: real details coming soon",
+    "draftNotice": "Preview mode: items marked Draft or Pending are hidden on the live site until they are confirmed.",
+    "index": "Index",
+    "scroll": "Scroll",
+    "backToTop": "Back to top",
+    "previewShort": "Preview: drafts visible"
+  },
+  "hero": {
+    "eyebrow": "Creative marketing for travel & tourism",
+    "lines": [
+      "We make",
+      "destinations",
+      "impossible",
+      "to ignore."
+    ],
+    "body": "Creative marketing experiences that bring travel and tourism brands closer to the people they want to reach.",
+    "primary": "Explore Our Work",
+    "secondary": "Let's Talk",
+    "aside": "One idea. Many directions.",
+    "cards": [
+      "Coast",
+      "Desert",
+      "City"
+    ],
+    "artLabel": "Illustrated postcards of a coast, a desert and a city, joined by a route line"
+  },
+  "band": {
+    "words": [
+      "Destinations",
+      "Stories",
+      "Campaigns",
+      "Content",
+      "Journeys",
+      "Ideas"
+    ]
+  },
+  "about": {
+    "kicker": "About Different",
+    "title": [
+      "Different ideas.",
+      "Different experiences.",
+      "Different results."
+    ],
+    "lead": "Different is a creative marketing agency that works hand in hand with travel and tourism brands. We start where every trip starts, with a feeling, then build the ideas, content and campaigns that turn that feeling into a plan.",
+    "body": "A destination is never just a place. It's the light at golden hour, the story a guide tells, the moment someone decides this is where they want to be. Our job is to find that moment and put it in front of the right people.",
+    "principlesTitle": "How we move",
+    "principles": [
+      {
+        "title": "Start with the feeling",
+        "body": "Before formats and deadlines, we ask what the traveller should feel. Everything else follows from that."
+      },
+      {
+        "title": "Say it differently",
+        "body": "Travel feeds tend to look alike. We look for the angle, the tone and the detail only your brand can own."
+      },
+      {
+        "title": "Made to move people",
+        "body": "Looking good is the starting point. The idea has to move people from scrolling to planning."
+      }
+    ],
+    "more": "More about us"
+  },
+  "clients": {
+    "kicker": "Our Clients",
+    "title": "Brands we've travelled with.",
+    "body": "Travel agencies, tour operators and tourism brands we've worked with.",
+    "empty": "Our client wall is being put together. It'll be here very soon.",
+    "viewAll": "See all clients",
+    "count": "{count, plural, one {# client} other {# clients}}",
+    "marqueeLabel": "Client logos"
+  },
+  "work": {
+    "kicker": "Our Work",
+    "title": "Selected work",
+    "body": "Campaigns, content and ideas made for travel brands.",
+    "view": "View project",
+    "viewAll": "See all work",
+    "emptyTitle": "Case studies are on their way.",
+    "empty": "We're preparing our projects for the web. Want to see the work now? Ask us for the portfolio.",
+    "emptyCta": "Request the portfolio",
+    "placeholderVisual": "Illustration: project visuals coming soon",
+    "clientTbc": "Client to be confirmed"
+  },
+  "caseStudy": {
+    "client": "Client",
+    "type": "Project",
+    "year": "Year",
+    "services": "Services",
+    "overview": "Overview",
+    "challenge": "The challenge",
+    "approach": "Our approach",
+    "deliverables": "What we delivered",
+    "gallery": "Visuals",
+    "results": "Results",
+    "resultsNote": "Figures supplied and verified by the client.",
+    "related": "More work",
+    "draftBanner": "Draft case study. This is a layout preview with placeholder content, not a real project.",
+    "missing": "Still needed",
+    "back": "All work",
+    "ctaTitle": "Have a destination that deserves this kind of story?",
+    "ctaButton": "Start a project"
+  },
+  "services": {
+    "kicker": "Services",
+    "title": "What we do",
+    "body": "Everything a travel brand needs to be seen, remembered and chosen.",
+    "empty": "Our services list is being finalized.",
+    "viewAll": "All services"
+  },
+  "cta": {
+    "kicker": "Next stop",
+    "title": [
+      "Your next",
+      "big idea",
+      "starts here."
+    ],
+    "body": "Tell us where you want to take your brand. We'll help you find the most interesting way to get there.",
+    "button": "Contact Us"
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Let's plan your next direction.",
+    "body": "A few lines are enough to get started. We read every message and reply personally.",
+    "emailLabel": "Email",
+    "whatsappLabel": "WhatsApp",
+    "whatsappCta": "Chat on WhatsApp",
+    "socialLabel": "Follow",
+    "form": {
+      "name": "Your name",
+      "company": "Company name",
+      "email": "Email",
+      "phone": "Phone number",
+      "service": "Service of interest",
+      "servicePlaceholder": "Choose one",
+      "serviceNotSure": "Not sure yet",
+      "serviceOther": "Something else",
+      "message": "Tell us about your project",
+      "messageHint": "Destination, audience, timing: whatever you know so far.",
+      "optional": "optional",
+      "required": "required",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "honeypot": "Leave this field empty"
+    },
+    "errors": {
+      "name": "Please tell us your name.",
+      "company": "Please add your company name.",
+      "email": "Please enter a valid email address.",
+      "phone": "That phone number doesn't look right.",
+      "message": "Please tell us a little more (at least 20 characters).",
+      "messageLong": "That's a bit long. Please keep it under 3,000 characters.",
+      "summary": "Please check the highlighted fields."
+    },
+    "status": {
+      "success": "Thanks! Your message is on its way to us. We'll get back to you soon.",
+      "notConfigured": "Our contact form isn't connected yet, so your message has NOT been sent. Please reach us by email or WhatsApp for now.",
+      "rateLimited": "Too many messages in a short time. Please wait a few minutes and try again.",
+      "spam": "Your message couldn't be sent. Please try again in a moment.",
+      "error": "Something went wrong and your message wasn't sent. Please try again or email us directly."
+    }
+  },
+  "footer": {
+    "description": "A creative marketing agency for travel and tourism brands.",
+    "navTitle": "Explore",
+    "contactTitle": "Say hello",
+    "languageTitle": "Language",
+    "rights": "© {year} Different. All rights reserved."
+  },
+  "notFound": {
+    "title": "Wrong turn.",
+    "body": "This page took a different direction. Let's get you back on the map.",
+    "button": "Back to home"
+  },
+  "error": {
+    "title": "Something went off route.",
+    "body": "An unexpected error stopped this page from loading.",
+    "retry": "Try again"
+  },
+  "loading": "Loading"
+}
