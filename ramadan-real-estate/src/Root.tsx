@@ -1,5 +1,9 @@
 import { Composition, Folder } from "remotion";
 import { TRAVEL_HOOK_GREEN_DURATION, TravelHookGreen } from "./TravelGreen";
+import {
+  TOURIST_TIPS_GREEN_DURATION,
+  TouristTipsGreen,
+} from "./TouristTipsGreen";
 import "./index.css";
 import { FPS, HouseVideo, MAIN_DURATION, TOTAL_DURATION } from "./Video";
 import { BRAND_TO_ASSET_DURATION, BrandToAsset } from "./BrandToAsset";
@@ -241,6 +245,14 @@ export const RemotionRoot: React.FC = () => {
           id="TravelHookGreen"
           component={TravelHookGreen}
           durationInFrames={TRAVEL_HOOK_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="TouristTipsGreen"
+          component={TouristTipsGreen}
+          durationInFrames={TOURIST_TIPS_GREEN_DURATION}
           fps={FPS}
           width={canvas.width}
           height={canvas.height}
