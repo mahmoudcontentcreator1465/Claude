@@ -1,16 +1,16 @@
 import { AbsoluteFill, Sequence, useCurrentFrame } from "remotion";
 import "./fonts";
-import { Chip, Strip, Top } from "./HajjGreen";
+import { Strip, Top } from "./HajjGreen";
 import { CHROMA, SlideStack, type Slide } from "./lib/greenscreen";
-import { GreenCard, Headline, Layer } from "./hajj/style";
+import { Chip, GreenCard, Headline, Layer } from "./go2cairo/style";
 import { SfxTrack } from "./hajj/sfx";
-import { accent as brown, font, ink, paper, tan } from "./hajj/theme";
+import { accent as brown, font, ink, paper, tan } from "./go2cairo/theme";
 import { Icon, paths } from "./lib/Icon";
 import { progress, sec, travel } from "./lib/motion";
 
 /**
  * "أهم 3 حاجات مع رحلتك" — the whole clip as one green-screen overlay, in the
- * beige/brown travel look. Frame 0 = 00:00:00,000 of the SRT (0927).
+ * Go2Cairo look (navy, sand, sun orange). Frame 0 = 00:00:00,000 of the SRT (0927).
  *
  * Mixed on purpose: tips 1 and 3 are motion-graphic cards, tip 2 and the
  * "third thing" line are a simple kinetic text bar.
@@ -57,7 +57,7 @@ const passportIcon = (
   </>
 );
 
-const border = "rgba(58,39,24,0.10)";
+const border = "rgba(10,31,51,0.10)";
 
 /* ======================================================================== */
 /* Card 1 — "أهم 3 حاجات… مع أبو خالد" then tip 1, the passport.            */
@@ -234,7 +234,7 @@ const CardOne: React.FC = () => {
                 height: 190,
                 marginLeft: -75,
                 borderRadius: 18,
-                backgroundColor: brown.deep,
+                backgroundColor: brown.base,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -244,7 +244,7 @@ const CardOne: React.FC = () => {
                 opacity: toHotel > 0.98 ? 0 : 1,
               }}
             >
-              <Icon size={96} color={tan.base} stroke={1.6}>
+              <Icon size={96} color={paper.lift} stroke={1.6}>
                 {passportIcon}
               </Icon>
             </div>
@@ -256,7 +256,7 @@ const CardOne: React.FC = () => {
                 width: 150,
                 height: 220,
                 borderRadius: 30,
-                backgroundColor: ink.full,
+                backgroundColor: tan.base,
                 padding: 10,
                 boxSizing: "border-box",
                 translate: `0px ${(1 - phoneIn) * 60}px`,
@@ -281,14 +281,14 @@ const CardOne: React.FC = () => {
                     width: 76,
                     height: 100,
                     borderRadius: 10,
-                    backgroundColor: brown.deep,
+                    backgroundColor: brown.base,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     scale: `${copy}`,
                   }}
                 >
-                  <Icon size={52} color={tan.base} stroke={1.8}>
+                  <Icon size={52} color={paper.lift} stroke={1.8}>
                     {passportIcon}
                   </Icon>
                 </div>
