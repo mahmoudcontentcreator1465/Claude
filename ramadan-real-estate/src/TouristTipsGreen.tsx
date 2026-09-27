@@ -31,6 +31,7 @@ const CUE = {
   change: at(8.0),
   exchange: at(9.5),
   anywhere: at(10.466),
+  spend: at(10.7),
   official: at(11.166),
   officialOnly: at(12.0),
   third: at(13.3),
@@ -372,7 +373,8 @@ const TextBar: React.FC = () => {
       at: f(CUE.change),
       parts: [
         { text: "تغيّرها", at: f(CUE.change) },
-        { text: "change", at: f(CUE.change) + 10, latin: true, accent: true },
+        { text: "تعمل", at: f(CUE.change) + 12 },
+        { text: "change", at: f(CUE.change) + 22, latin: true, accent: true },
       ],
     },
     {
@@ -384,19 +386,23 @@ const TextBar: React.FC = () => {
     },
     {
       at: f(CUE.anywhere),
-      parts: [{ text: "أو أي مكان بيصرف", at: f(CUE.anywhere) }],
+      parts: [{ text: "أو أي مكان", at: f(CUE.anywhere) }],
     },
     {
-      at: f(CUE.official),
+      at: f(CUE.spend),
       parts: [
+        { text: "بتصرّف", at: f(CUE.spend) },
         { text: "من الأماكن", at: f(CUE.official) },
-        { text: "الرسمية بس", at: f(CUE.officialOnly), accent: true },
       ],
+    },
+    {
+      at: f(CUE.officialOnly),
+      parts: [{ text: "الرسمية بس", at: f(CUE.officialOnly), accent: true }],
     },
     {
       at: f(CUE.third),
       parts: [
-        { text: "ثالث حاجة", at: f(CUE.third) },
+        { text: "ثالث شيء", at: f(CUE.third) },
         { text: "وده الأهم", at: f(CUE.third) + 14, accent: true },
       ],
     },
@@ -471,7 +477,8 @@ const TextBar: React.FC = () => {
           { at: f(CUE.change), name: "swipe" },
           { at: f(CUE.exchange), name: "swipe" },
           { at: f(CUE.anywhere), name: "swipe" },
-          { at: f(CUE.official), name: "swipe" },
+          { at: f(CUE.spend), name: "swipe" },
+          { at: f(CUE.officialOnly), name: "swipe" },
           { at: f(CUE.officialOnly), name: "tick" },
           { at: f(CUE.third), name: "swipe" },
           { at: f(CUE.third) + 2, name: "pop" },
@@ -520,7 +527,7 @@ const CardTwo: React.FC = () => {
       at: f(CUE.so),
       parts: [
         { text: "عشان تبقى رحلتك", at: f(CUE.so) },
-        { text: "صغيرة", at: f(CUE.so) + 18, accent: true },
+        { text: "سعيدة", at: f(CUE.so) + 18, accent: true },
       ],
     },
   ];
@@ -645,7 +652,7 @@ const CardTwo: React.FC = () => {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  جولة القاهرة الجديدة
+                  القاهرة الجديدة
                 </span>
               </div>
               {/* Route with three stops. */}
