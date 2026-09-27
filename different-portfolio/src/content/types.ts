@@ -44,13 +44,23 @@ export interface ClientLogo {
    * - `transparent-on-dark`: transparent file with light marks; sits on a dark card.
    */
   treatment: "artwork" | "transparent-on-light" | "transparent-on-dark";
+  /**
+   * Optional visual enlargement for files that sit on a large transparent canvas.
+   * Only empty transparent margin is ever clipped; the artwork itself is never cropped.
+   */
+  zoom?: number;
 }
 
 export interface Client {
   id: string;
   slug: string;
-  /** Names exactly as the client writes them. Arabic falls back to English when absent. */
-  name: { en: string; ar?: string };
+  /**
+   * Names exactly as they appear on the client's own logo. Either language may be
+   * missing (never invent a transliteration); the other one is shown instead.
+   */
+  name: { en: string; ar?: string } | { en?: string; ar: string };
+  /** Open questions for Different (spelling, duplicates…). Internal only, never rendered. */
+  openQuestion?: string;
   logo: ClientLogo;
   logoAlt?: ClientLogo;
   services: ServiceId[];

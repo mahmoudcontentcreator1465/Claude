@@ -6,8 +6,18 @@ function Row({ clients, names, hidden }: { clients: Client[]; names: Record<stri
   return (
     <ul aria-hidden={hidden || undefined} className="flex shrink-0 items-center gap-4 pe-4 md:gap-6 md:pe-6">
       {clients.map((c) => (
-        <li key={c.id} className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-white ring-1 ring-line md:h-32 md:w-32">
-          <Image src={c.logo.image} alt={hidden ? "" : `${names[c.id]} logo`} fill sizes="128px" className={`object-contain ${c.logo.treatment === "artwork" ? "" : "p-4"}`} />
+        <li
+          key={c.id}
+          className={`relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl ring-1 ring-line md:h-32 md:w-32 ${c.logo.treatment === "transparent-on-dark" ? "bg-ink" : "bg-white"}`}
+        >
+          <Image
+            src={c.logo.image}
+            alt={hidden ? "" : `${names[c.id]} logo`}
+            fill
+            sizes="128px"
+            className={`object-contain ${c.logo.treatment === "artwork" ? "" : "p-4"}`}
+            style={c.logo.zoom ? { scale: String(c.logo.zoom) } : undefined}
+          />
         </li>
       ))}
     </ul>

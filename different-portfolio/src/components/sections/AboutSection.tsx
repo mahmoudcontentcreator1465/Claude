@@ -8,16 +8,19 @@ type Principle = { title: string; body: string };
 export async function AboutSection({ index = "01", showLink = true, as = "h2" }: { index?: string; showLink?: boolean; as?: "h1" | "h2" }) {
   const t = await getTranslations("about");
   const principles = t.raw("principles") as Principle[];
+  // Keep heading levels sequential whether this section opens the page (h1) or sits inside it (h2).
+  const Sub = as === "h1" ? "h2" : "h3";
+  const Item = as === "h1" ? "h3" : "h4";
 
   return (
     <section id="about" aria-labelledby="about-title" className={`shell ${as === "h1" ? "pb-24 pt-32 md:pb-36 md:pt-44" : "py-24 md:py-36"}`}>
       <SectionHeader index={index} kicker={t("kicker")} title={t.raw("title") as string[]} id="about-title" as={as} />
 
       <div className="mt-14 grid gap-10 md:mt-20 lg:grid-cols-12">
-        <Reveal className="lg:col-span-6 lg:col-start-1">
+        <Reveal onLoad={as === "h1"} delay={as === "h1" ? 0.2 : 0} className="lg:col-span-6 lg:col-start-1">
           <p className="t-h3 font-semibold [text-wrap:pretty]">{t("lead")}</p>
         </Reveal>
-        <Reveal delay={0.1} className="flex flex-col gap-8 lg:col-span-5 lg:col-start-8">
+        <Reveal onLoad={as === "h1"} delay={as === "h1" ? 0.3 : 0.1} className="flex flex-col gap-8 lg:col-span-5 lg:col-start-8">
           <p className="t-lead text-ink-2 [text-wrap:pretty]">{t("body")}</p>
           {showLink ? (
             <ButtonLink href="/about" variant="light" className="self-start">
@@ -28,7 +31,7 @@ export async function AboutSection({ index = "01", showLink = true, as = "h2" }:
       </div>
 
       <div className="mt-20 md:mt-28">
-        <h3 className="t-label mb-6 text-ink-3">{t("principlesTitle")}</h3>
+        <Sub className="t-label mb-6 text-ink-3">{t("principlesTitle")}</Sub>
         <ol className="grid border-t hairline md:grid-cols-3">
           {principles.map((p, i) => (
             <Reveal
@@ -44,7 +47,7 @@ export async function AboutSection({ index = "01", showLink = true, as = "h2" }:
                 </span>
                 <span className={`h-px flex-1 origin-[inline-start] bg-ink/20 ${i === 1 ? "!bg-teal !h-[2px]" : ""}`} />
               </span>
-              <h4 className="t-h3">{p.title}</h4>
+              <Item className="t-h3">{p.title}</Item>
               <p className="mt-4 max-w-sm text-ink-2">{p.body}</p>
             </Reveal>
           ))}

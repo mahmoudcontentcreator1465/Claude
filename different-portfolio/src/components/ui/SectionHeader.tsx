@@ -34,12 +34,13 @@ export function SectionHeader({
       </div>
       <Lines
         as={as}
+        onLoad={as === "h1"}
         lines={Array.isArray(title) ? title : [title]}
         className={`${as === "h1" ? "t-h1" : "t-h2"} lg:col-span-8 [text-wrap:balance]`}
         id={id}
       />
       {(intro || action) && (
-        <Reveal delay={0.15} className="flex flex-col items-start justify-end gap-6 lg:col-span-4">
+        <Reveal delay={0.15} onLoad={as === "h1"} className="flex flex-col items-start justify-end gap-6 lg:col-span-4">
           {intro ? <p className={`t-lead max-w-md ${tone === "dark" ? "text-white/75" : "text-ink-2"}`}>{intro}</p> : null}
           {action}
         </Reveal>

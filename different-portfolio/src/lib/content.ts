@@ -24,7 +24,7 @@ export function getClient(id: string | null): Client | undefined {
 }
 
 export function clientName(client: Client, locale: Locale): string {
-  return client.name[locale] ?? client.name.en;
+  return (client.name[locale] ?? client.name.en ?? client.name.ar)!;
 }
 
 export function getServices(): Service[] {

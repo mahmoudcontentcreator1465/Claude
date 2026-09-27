@@ -25,11 +25,11 @@ export async function ContactSection({ index = "05", as = "h2" }: { index?: stri
             <span className="t-label tabular-nums text-ink-3">{index}</span>
             <span className="t-label">{t("kicker")}</span>
           </div>
-          <Lines as={as} id="contact-title" lines={[t("title")]} className={`${as === "h1" ? "t-h1" : "t-h2"} [text-wrap:balance]`} />
-          <Reveal delay={0.1}>
+          <Lines as={as} onLoad={as === "h1"} id="contact-title" lines={[t("title")]} className={`${as === "h1" ? "t-h1" : "t-h2"} [text-wrap:balance]`} />
+          <Reveal delay={0.1} onLoad={as === "h1"}>
             <p className="t-lead mt-6 max-w-md text-ink-2">{t("body")}</p>
           </Reveal>
-          <Reveal delay={0.2} className="mt-10 space-y-8">
+          <Reveal delay={0.2} onLoad={as === "h1"} className="mt-10 space-y-8">
             {wa ? (
               <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-light">
                 <span>{t("whatsappCta")}</span>
@@ -45,7 +45,7 @@ export async function ContactSection({ index = "05", as = "h2" }: { index?: stri
           </Reveal>
         </div>
 
-        <Reveal delay={0.1} className="lg:col-span-7">
+        <Reveal delay={0.1} onLoad={as === "h1"} className="lg:col-span-7">
           <div className="rounded-[1.75rem] bg-white p-5 ring-1 ring-line sm:p-8 md:p-10">
             <ContactForm serviceOptions={options} />
           </div>

@@ -18,7 +18,7 @@ export function LogoCard({
   badge?: string;
   sizes?: string;
 }) {
-  const { image, treatment } = client.logo;
+  const { image, treatment, zoom } = client.logo;
   const surface =
     treatment === "transparent-on-dark" ? "bg-ink" : treatment === "transparent-on-light" ? "bg-white" : "bg-white";
   const pad = treatment === "artwork" ? "p-0" : "p-[16%]";
@@ -36,6 +36,7 @@ export function LogoCard({
               fill
               sizes={sizes}
               className="object-contain transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.03]"
+              style={zoom ? { scale: String(zoom) } : undefined}
             />
           </div>
         </div>

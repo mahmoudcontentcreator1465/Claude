@@ -41,8 +41,12 @@
 
 /* Arabic swaps the whole type system, not just the font name. */
 :root:lang(ar) {
-  --font-display: var(--font-alexandria), var(--font-plex-ar), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-plex-ar), ui-sans-serif, system-ui, sans-serif;
+  /* "Plus Jakarta Sans" comes first but its faces only cover Latin (unicode-range), so Latin words
+     and digits inside Arabic text reuse the already-loaded Latin file and the Arabic faces' Latin
+     files are never fetched. It's the literal family name on purpose: var(--font-jakarta) also
+     carries a local(Arial) fallback face with no unicode-range, which would capture Arabic glyphs. */
+  --font-display: "Plus Jakarta Sans", var(--font-alexandria), var(--font-plex-ar), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", var(--font-plex-ar), ui-sans-serif, system-ui, sans-serif;
   --marquee-dir: -1;
 }
 
@@ -268,7 +272,9 @@
 /* Above-the-fold entrances: CSS animations that start with the first paint. */
 .load-fade { animation: fade-up 0.9s var(--ease-out-expo) var(--d, 0s) both; }
 .load-lines .line > span { animation: line-up 1.05s var(--ease-out-expo) calc(var(--d, 0s) + var(--i, 0) * 90ms) both; }
-.page-enter { animation: fade-up 0.7s var(--ease-out-expo) both; --ry: 14px; }
+/* Transform-only so the first paint is never held back by an opacity fade. */
+.page-enter { animation: page-in 0.7s var(--ease-out-expo) both; }
+@keyframes page-in { from { transform: translate3d(0, 14px, 0); } }
 @keyframes fade-up { from { opacity: 0; transform: translate3d(0, var(--ry, 28px), 0); } }
 @keyframes line-up { from { transform: translateY(108%) rotate(2.5deg); } }
 
