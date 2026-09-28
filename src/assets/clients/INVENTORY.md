@@ -5,7 +5,7 @@
 
 Decisions: Charm Light stays as written on the logo · Sisi Travel is **two clients** (Mohandessin
 and Nasr City branches) · Mega Star's square logo is the main one · باب العمرة stays Arabic-only ·
-1 Touch stays · Tropitel Valley Tours is added · "Marbya" and "GtaOtel" spellings are correct.
+1 Touch was later removed from the site at Different's request (2026-09-28; file kept in batch-2) · Tropitel Valley Tours is added · "Marbya" and "GtaOtel" spellings are correct.
 
 Names are copied exactly from each logo. Where a logo carries no English (or no Arabic) name,
 that language is left empty rather than invented.
@@ -28,7 +28,7 @@ These batch-2 files are byte-identical to batch-1 files; batch-1 copies stay in 
 | upload-4.jpg (Bosat) | 445104408_855292479949293_6195387118907394115_n.jpg |
 | upload-5.jpg (Sobek) | 671134384_955492216872985_935924990703332078_n.jpg |
 
-## Clients (25 entries: 24 brands, Sisi Travel listed per branch)
+## Clients (24 entries on the site: Sisi Travel listed per branch, 1 Touch removed)
 
 Card: `artwork` = file has its own background, shown whole; `light` / `dark` = transparent file on a white / black card.
 
@@ -52,7 +52,7 @@ Card: `artwork` = file has its own background, shown whole; `light` / `dark` = t
 | 16 | Funny Tours · (none) | Layer 2.png | PNG 138×83 | light | pending |
 | 17 | (no English) · باب العمرة | logo1.png | PNG 199×123 | dark | ⚠️ no English name on the logo. Official English name, or show Arabic on /en? (This is the logo that looked blank in chat.) |
 | 18 | World Gate · (none) | world gate logo-01.png | PNG 121×133 | light | pending |
-| 19 | 1 Touch · (tagline: مركز صيانة متكامل) | Group 1.png | PNG 119×122 | light | ⚠️ car service centre, not travel. Include? (not featured on home meanwhile) |
+| 19 | 1 Touch · (tagline: مركز صيانة متكامل) | Group 1.png | PNG 119×122 | light | **removed from the site** (2026-09-28, at Different's request); file kept |
 | 20 | Safe Way Travel · سيف واي | logo (1).png | PNG 957×335 | light | pending |
 | 21 | New Jersey Tours · نيو جيرسي للسياحة | Layer 0.png | PNG 906×1136 | light | pending |
 | 22 | Lines Travel · (none) | logo.png | PNG 206×79 | light | pending |
