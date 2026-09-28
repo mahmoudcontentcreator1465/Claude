@@ -23,7 +23,6 @@ import kyrelloLogo from "@/assets/clients/batch-2/Kyrello-Vector-Smart-Object.pn
 import funnyToursLogo from "@/assets/clients/batch-2/Layer 2.png";
 import babAlOmraLogo from "@/assets/clients/batch-2/logo1.png";
 import worldGateLogo from "@/assets/clients/batch-2/world gate logo-01.png";
-import oneTouchLogo from "@/assets/clients/batch-2/Group 1.png";
 import safeWayLogo from "@/assets/clients/batch-2/logo (1).png";
 import newJerseyLogo from "@/assets/clients/batch-2/Layer 0.png";
 import linesLogo from "@/assets/clients/batch-2/logo.png";
@@ -250,17 +249,6 @@ export const clients: Client[] = [
     order: 180,
     status: "published",
     source: "batch-2/world gate logo-01.png",
-  },
-  {
-    id: "1-touch",
-    slug: "1-touch",
-    name: { en: "1 Touch" },
-    logo: { image: oneTouchLogo, treatment: "transparent-on-light" },
-    services: [],
-    featured: false,
-    order: 190,
-    status: "published",
-    source: "batch-2/Group 1.png",
   },
   {
     id: "safe-way-travel",
