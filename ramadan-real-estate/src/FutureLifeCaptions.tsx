@@ -1,15 +1,14 @@
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import "./fonts";
-import { CHROMA, SlideStack, type Slide } from "./lib/greenscreen";
-import { sec } from "./lib/motion";
+import { progress, sec } from "./lib/motion";
 import { font } from "./theme";
 
 /**
- * Future Life — برادات السبيل. Very simple bilingual captions straight on
- * chroma green, no box behind them: Arabic on top (white, key words in the
- * brand teal) and the English line under it (white). Frame 0 =
- * 00:00:00,000 of the SRT (09283). Text is solid colour only, so it keys
- * cleanly; add any shadow in the edit after keying.
+ * Future Life — برادات السبيل. Very simple bilingual captions on a
+ * transparent background (render with alpha): Arabic on top in white, key
+ * words in a light brand teal, English under it in white, all with a soft
+ * teal/purple glow so they read over any shot. Frame 0 = 00:00:00,000 of the
+ * SRT (09283).
  */
 
 const FL = {
@@ -170,83 +169,98 @@ const CAPS: Cap[] = [
   },
 ];
 
-const AR: Slide[] = CAPS.map((c) => ({
-  at: s(c.at),
-  parts: c.ar.map(([text, at, accent]) => ({ text, at: s(at), accent })),
-}));
-
-const EN: Slide[] = CAPS.map((c) => ({
-  at: s(c.at),
-  parts: [{ text: c.en, at: s(c.at) + 4 }],
-}));
-
 const END = s(60.7);
 export const FUTURE_LIFE_CAPTIONS_DURATION = END + 20;
 
-/** Both lines clear out together once the last caption has been read. */
-const Out: React.FC<{ frame: number; children: React.ReactNode }> = ({
-  frame,
-  children,
-}) => (frame < END + 6 ? <>{children}</> : null);
+/** Light teal for the accent words, so they still glow on dark shots. */
+const TEAL_LIGHT = "#7DB8CE";
+
+const glow = (color: string) =>
+  `0 0 3px rgba(54,25,83,0.7), 0 0 12px ${color}, 0 0 30px ${color}, 0 0 60px rgba(54,25,83,0.55)`;
+
+const TEAL_GLOW = "rgba(90,154,179,0.85)";
+
+/** Which caption is on screen, and how far it has come in / gone out. */
+const useCaption = (frame: number) => {
+  let i = -1;
+  for (let k = 0; k < CAPS.length; k++) if (frame >= s(CAPS[k].at)) i = k;
+  if (i < 0) return null;
+  const cap = CAPS[i];
+  const next = CAPS[i + 1];
+  const outAt = next ? s(next.at) : END + 6;
+  const out = progress(frame, outAt - 5, outAt);
+  return { cap, out };
+};
 
 export const FutureLifeCaptions: React.FC = () => {
   const frame = useCurrentFrame();
+  const cur = useCaption(frame);
+  if (!cur) return <AbsoluteFill />;
+  const { cap, out } = cur;
+  const enIn = progress(frame, s(cap.at) + 4, s(cap.at) + 16);
 
   return (
-    <AbsoluteFill style={{ backgroundColor: CHROMA }}>
-      <Out frame={frame}>
-        <div style={{ position: "absolute", left: 60, right: 60, top: 1470 }}>
-          <SlideStack
-            frame={frame}
-            slides={AR}
-            height={100}
-            justify="center"
-            renderPart={(p, shown) => (
-              <span
-                style={{
-                  display: "inline-block",
-                  fontFamily: font.arDisplay,
-                  fontSize: 62,
-                  lineHeight: 1,
-                  color: p.accent ? FL.teal : FL.white,
-                  translate: `0px ${(1 - shown) * 34}px`,
-                  clipPath: `inset(0 0 ${(1 - shown) * 100}% 0)`,
-                }}
-              >
-                {p.text}
-              </span>
-            )}
-          />
-        </div>
-        <div
-          dir="ltr"
-          style={{ position: "absolute", left: 60, right: 60, top: 1574 }}
-        >
-          <SlideStack
-            frame={frame}
-            slides={EN}
-            height={60}
-            justify="center"
-            renderPart={(p, shown) => (
-              <span
-                style={{
-                  display: "inline-block",
-                  fontFamily: font.display,
-                  fontWeight: 700,
-                  fontSize: 38,
-                  letterSpacing: "-0.01em",
-                  lineHeight: 1,
-                  color: FL.white,
-                  translate: `0px ${(1 - shown) * 24}px`,
-                  clipPath: `inset(0 0 ${(1 - shown) * 100}% 0)`,
-                }}
-              >
-                {p.text}
-              </span>
-            )}
-          />
-        </div>
-      </Out>
+    <AbsoluteFill>
+      <div
+        dir="rtl"
+        style={{
+          position: "absolute",
+          left: 40,
+          right: 40,
+          top: 1480,
+          display: "flex",
+          justifyContent: "center",
+          gap: "0.28em",
+          opacity: 1 - out,
+          translate: `0px ${-out * 16}px`,
+        }}
+      >
+        {cap.ar.map(([text, at, accent]) => {
+          const shown = progress(frame, s(at), s(at) + 12);
+          if (frame < s(at)) return null;
+          return (
+            <span
+              key={text}
+              style={{
+                fontFamily: font.arDisplay,
+                fontSize: 64,
+                lineHeight: 1.2,
+                whiteSpace: "nowrap",
+                color: accent ? TEAL_LIGHT : FL.white,
+                textShadow: glow(TEAL_GLOW),
+                opacity: shown,
+                translate: `0px ${(1 - shown) * 26}px`,
+                filter: `blur(${(1 - shown) * 6}px)`,
+              }}
+            >
+              {text}
+            </span>
+          );
+        })}
+      </div>
+      <div
+        dir="ltr"
+        style={{
+          position: "absolute",
+          left: 40,
+          right: 40,
+          top: 1586,
+          textAlign: "center",
+          fontFamily: font.display,
+          fontWeight: 700,
+          fontSize: 38,
+          letterSpacing: "-0.01em",
+          lineHeight: 1.2,
+          whiteSpace: "nowrap",
+          color: FL.white,
+          textShadow: glow(TEAL_GLOW),
+          opacity: enIn * (1 - out),
+          translate: `0px ${(1 - enIn) * 18 - out * 16}px`,
+          filter: `blur(${(1 - enIn) * 5}px)`,
+        }}
+      >
+        {cap.en}
+      </div>
     </AbsoluteFill>
   );
 };
