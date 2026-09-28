@@ -28,7 +28,7 @@ These batch-2 files are byte-identical to batch-1 files; batch-1 copies stay in 
 | upload-4.jpg (Bosat) | 445104408_855292479949293_6195387118907394115_n.jpg |
 | upload-5.jpg (Sobek) | 671134384_955492216872985_935924990703332078_n.jpg |
 
-## Clients (24 entries on the site: Sisi Travel listed per branch, 1 Touch removed)
+## Clients from batches 1–2 (24 entries on the site: Sisi Travel listed per branch, 1 Touch removed)
 
 Card: `artwork` = file has its own background, shown whole; `light` / `dark` = transparent file on a white / black card.
 
@@ -58,6 +58,15 @@ Card: `artwork` = file has its own background, shown whole; `light` / `dark` = t
 | 22 | Lines Travel · (none) | logo.png | PNG 206×79 | light | pending |
 | 23 | GtaOtel · (none) | 29abb490-1d57-40ed-a508-e7518726c3b9.png | PNG 141×152 | light | ⚠️ confirm spelling/capitalisation |
 | 24 | Exodus Travel · (none) | Exodus Logo 02.png | PNG 491×166 | dark | pending (this is the "X… Travel" logo from chat) |
+
+## Batch 3 (received 2026-09-28, added at Different's request)
+
+Sent in chat; the upload renamed the files, so they are stored as `batch-3/upload-<n>`.
+
+| Name on logo (EN · AR) | File | Format | Card | Status |
+|---|---|---|---|---|
+| SAM Tours ("for travel") · (none) | batch-3/upload-9.jpg | JPEG 1964×2000 | artwork | published |
+| Promo Tours · برومو تورز للسياحة | batch-3/upload-10.webp | WebP 1192×1000 | artwork | published |
 
 ## Previously seen in chat, now received
 
