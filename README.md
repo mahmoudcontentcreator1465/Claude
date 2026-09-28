@@ -76,8 +76,8 @@ In `src/content/services.ts`, change a service's `status` to `"published"`.
 
 ### Contact details
 
-Edit `src/content/site.ts`: replace the value and remove `placeholder: true`. For WhatsApp also set
-`number` in international format without `+` (e.g. `"201001234567"`) to enable the wa.me link.
+Edit `src/content/site.ts`: replace the value and remove `placeholder: true` (placeholders are never shown).
+WhatsApp is live (`+20 103 996 0952`); email and social links are still placeholders.
 
 ## Contact form
 
@@ -87,9 +87,10 @@ Edit `src/content/site.ts`: replace the value and remove `placeholder: true`. Fo
 - Validation: name, company, email and message (20–3000 characters) are required; phone and service are optional.
 - Spam protection: hidden honeypot field, minimum fill time, per-IP rate limit (5 per 10 min, per
   server instance), and optional Cloudflare Turnstile.
-- **Delivery is off.** Until `CONTACT_DELIVERY_ENABLED=true` and `RESEND_API_KEY`, `CONTACT_TO_EMAIL`
-  and `CONTACT_FROM_EMAIL` are set, submissions are validated and the visitor is told plainly that the
-  message was *not* sent, and pointed to email/WhatsApp.
+- **Delivery is off, so the form is hidden.** Until `CONTACT_DELIVERY_ENABLED=true` and `RESEND_API_KEY`,
+  `CONTACT_TO_EMAIL` and `CONTACT_FROM_EMAIL` are set, the contact page shows a WhatsApp card instead
+  of the form (so nobody fills in a form that can't send). The form appears automatically once
+  delivery is configured.
 
 To turn it on:
 1. Create a Resend account, verify the sending domain, create an API key.

@@ -45,3 +45,8 @@ export function getServices(): Service[] {
 export function getPublishedServices(): Service[] {
   return services.filter((s) => s.status === "published").sort(byOrder);
 }
+
+/** True while anything is still unpublished, so previews can flag that drafts are showing. */
+export function hasUnpublishedContent(): boolean {
+  return [...clients, ...services].some((item) => item.status !== "published");
+}

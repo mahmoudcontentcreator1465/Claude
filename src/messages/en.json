@@ -133,7 +133,7 @@
   "contact": {
     "kicker": "Contact",
     "title": "Let's plan your next direction.",
-    "body": "A few lines are enough to get started. We read every message and reply personally.",
+    "body": "Tell us about your brand and where you want to take it. We read every message and reply personally.",
     "emailLabel": "Email",
     "whatsappLabel": "WhatsApp",
     "whatsappCta": "Chat on WhatsApp",
@@ -170,7 +170,10 @@
       "rateLimited": "Too many messages in a short time. Please wait a few minutes and try again.",
       "spam": "Your message couldn't be sent. Please try again in a moment.",
       "error": "Something went wrong and your message wasn't sent. Please try again or email us directly."
-    }
+    },
+    "whatsappTitle": "The quickest way to reach us is WhatsApp.",
+    "whatsappBody": "Send us a message about your brand and what you have in mind. We'll reply personally.",
+    "whatsappPrefill": "Hi Different, I'd like to talk about a project."
   },
   "footer": {
     "description": "A creative marketing agency for travel and tourism brands.",

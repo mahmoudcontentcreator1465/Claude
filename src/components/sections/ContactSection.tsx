@@ -1,19 +1,24 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getPublishedServices } from "@/lib/content";
+import { deliveryConfigured } from "@/lib/contact-delivery";
 import { site, whatsappHref } from "@/content/site";
 import { Lines } from "@/components/motion/Lines";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactPoints } from "@/components/layout/ContactPoints";
 import { ContactForm } from "@/components/contact/ContactForm";
-import { Badge } from "@/components/ui/Badge";
+import { ArrowBadge } from "@/components/ui/ButtonLink";
 import { WhatsApp } from "@/components/ui/Icons";
 
+/**
+ * Contact block. The form is shown only once email delivery is configured (see README);
+ * until then the page leads with WhatsApp, so no visitor ever fills in a form that can't send.
+ */
 export async function ContactSection({ index = "05", as = "h2" }: { index?: string; as?: "h1" | "h2" }) {
   const t = await getTranslations("contact");
-  const tc = await getTranslations("common");
   const locale = (await getLocale()) as Locale;
-  const wa = whatsappHref();
+  const wa = whatsappHref(t("whatsappPrefill"));
+  const formLive = deliveryConfigured();
   // Only confirmed services are offered in the form.
   const options = getPublishedServices().map((s) => s.title[locale]);
 
@@ -29,26 +34,38 @@ export async function ContactSection({ index = "05", as = "h2" }: { index?: stri
           <Reveal delay={0.1} onLoad={as === "h1"}>
             <p className="t-lead mt-6 max-w-md text-ink-2">{t("body")}</p>
           </Reveal>
-          <Reveal delay={0.2} onLoad={as === "h1"} className="mt-10 space-y-8">
-            {wa ? (
-              <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-light">
-                <span>{t("whatsappCta")}</span>
-                <span className="btn-icon"><WhatsApp /></span>
-              </a>
-            ) : (
-              <span className="inline-flex items-center gap-3 rounded-full border border-dashed border-line-strong px-5 py-3 text-sm text-ink-3" title={tc("placeholderNote")}>
-                <WhatsApp /> {t("whatsappCta")} <Badge>{tc("tbc")}</Badge>
-                <span className="sr-only">{site.whatsapp.value}</span>
-              </span>
-            )}
-            <ContactPoints />
-          </Reveal>
+          {formLive ? (
+            <Reveal delay={0.2} onLoad={as === "h1"} className="mt-10">
+              <ContactPoints />
+            </Reveal>
+          ) : null}
         </div>
 
         <Reveal delay={0.1} onLoad={as === "h1"} className="lg:col-span-7">
-          <div className="rounded-[1.75rem] bg-white p-5 ring-1 ring-line sm:p-8 md:p-10">
-            <ContactForm serviceOptions={options} />
-          </div>
+          {formLive ? (
+            <div className="rounded-[1.75rem] bg-white p-5 ring-1 ring-line sm:p-8 md:p-10">
+              <ContactForm serviceOptions={options} />
+            </div>
+          ) : wa ? (
+            <div className="flex h-full flex-col justify-between gap-10 rounded-[1.75rem] bg-white p-6 ring-1 ring-line sm:p-10">
+              <div>
+                <span className="grid h-14 w-14 place-items-center rounded-full bg-teal-soft text-teal-ink">
+                  <WhatsApp width={26} height={26} />
+                </span>
+                <h3 className="t-h3 mt-8">{t("whatsappTitle")}</h3>
+                <p className="t-lead mt-3 max-w-md text-ink-2">{t("whatsappBody")}</p>
+              </div>
+              <div className="flex flex-col items-start gap-4">
+                <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-teal !min-h-14">
+                  <span>{t("whatsappCta")}</span>
+                  <ArrowBadge />
+                </a>
+                <a href={wa} target="_blank" rel="noopener noreferrer" className="link-draw text-lg font-medium text-ink-2" dir="ltr">
+                  {site.whatsapp.value}
+                </a>
+              </div>
+            </div>
+          ) : null}
         </Reveal>
       </div>
     </section>

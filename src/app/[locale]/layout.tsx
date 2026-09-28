@@ -4,7 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, localeDirection, type Locale } from "@/i18n/routing";
 import { alexandria, jakarta, plexArabic } from "@/lib/fonts";
-import { getServices, showDrafts } from "@/lib/content";
+import { getServices, hasUnpublishedContent, showDrafts } from "@/lib/content";
 import { siteUrl } from "@/lib/seo";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { Cursor } from "@/components/motion/Cursor";
@@ -106,7 +106,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
                 languages,
               }}
             />
-            {showDrafts ? (
+            {showDrafts && hasUnpublishedContent() ? (
               <p
                 title={tc("draftNotice")}
                 className="fixed bottom-3 start-3 z-40 flex max-w-[calc(100vw-1.5rem)] items-center gap-2 rounded-full border border-sun bg-white/95 py-1.5 pe-3 ps-1.5 text-xs font-medium text-ink-2 shadow-sm backdrop-blur"

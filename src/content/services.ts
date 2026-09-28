@@ -1,14 +1,14 @@
 import type { Service } from "./types";
 
 /**
- * Proposed services. All are `draft` until Different confirms which ones it offers.
- * To publish one, change its status to "published".
+ * Services offered by Different (all eight confirmed on 2026-09-28).
+ * To hide one, change its status to "draft".
  */
 export const services: Service[] = [
   {
     id: "social-media-management",
     order: 1,
-    status: "draft",
+    status: "published",
     title: { en: "Social Media Management", ar: "إدارة السوشيال ميديا" },
     description: {
       en: "An always-on presence with a point of view: planning, publishing and community care that keeps your brand in the conversation.",
@@ -18,7 +18,7 @@ export const services: Service[] = [
   {
     id: "content-creation",
     order: 2,
-    status: "draft",
+    status: "published",
     title: { en: "Content Creation", ar: "صناعة المحتوى" },
     description: {
       en: "Reels, stories, posts and copy shaped around how travellers actually scroll, save and share.",
@@ -28,7 +28,7 @@ export const services: Service[] = [
   {
     id: "creative-campaigns",
     order: 3,
-    status: "draft",
+    status: "published",
     title: { en: "Creative Campaigns", ar: "الحملات الإبداعية" },
     description: {
       en: "Big ideas for seasons, launches and destinations, built to travel across every channel.",
@@ -38,7 +38,7 @@ export const services: Service[] = [
   {
     id: "photo-video-production",
     order: 4,
-    status: "draft",
+    status: "published",
     title: { en: "Photography & Video Production", ar: "التصوير وإنتاج الفيديو" },
     description: {
       en: "On-location shoots that capture the light, texture and pace of a place.",
@@ -48,7 +48,7 @@ export const services: Service[] = [
   {
     id: "branding-identity",
     order: 5,
-    status: "draft",
+    status: "published",
     title: { en: "Branding & Visual Identity", ar: "البراندنج والهوية البصرية" },
     description: {
       en: "Names, logos and visual systems for travel brands that want to be remembered.",
@@ -58,7 +58,7 @@ export const services: Service[] = [
   {
     id: "performance-marketing",
     order: 6,
-    status: "draft",
+    status: "published",
     title: { en: "Performance Marketing", ar: "التسويق بالأداء" },
     description: {
       en: "Paid media planned around the booking journey, measured and refined while it runs.",
@@ -68,7 +68,7 @@ export const services: Service[] = [
   {
     id: "digital-strategy",
     order: 7,
-    status: "draft",
+    status: "published",
     title: { en: "Digital Strategy", ar: "الاستراتيجية الرقمية" },
     description: {
       en: "Clear priorities for where to show up, what to say and how to grow.",
@@ -78,7 +78,7 @@ export const services: Service[] = [
   {
     id: "travel-tourism-marketing",
     order: 8,
-    status: "draft",
+    status: "published",
     title: { en: "Travel & Tourism Marketing", ar: "تسويق السفر والسياحة" },
     description: {
       en: "Marketing thinking shaped by how people dream about, plan and book their trips.",

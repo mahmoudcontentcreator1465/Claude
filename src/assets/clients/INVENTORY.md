@@ -1,8 +1,11 @@
 # Client logo inventory
 
-**Status: COLLECTING. Do not finalize.** Every client is `pending` in `src/content/clients.ts`:
-hidden on the live site, visible with a "Pending" badge in previews. Nothing is published until
-Different confirms that all logos have been received and answers the open questions below.
+**Status: CONFIRMED (2026-09-28).** Different confirmed that these are all the current logos
+(more may be sent later) and answered every open question. All clients are `published`.
+
+Decisions: Charm Light stays as written on the logo · Sisi Travel is **two clients** (Mohandessin
+and Nasr City branches) · Mega Star's square logo is the main one · باب العمرة stays Arabic-only ·
+1 Touch stays · Tropitel Valley Tours is added · "Marbya" and "GtaOtel" spellings are correct.
 
 Names are copied exactly from each logo. Where a logo carries no English (or no Arabic) name,
 that language is left empty rather than invented.
@@ -25,7 +28,7 @@ These batch-2 files are byte-identical to batch-1 files; batch-1 copies stay in 
 | upload-4.jpg (Bosat) | 445104408_855292479949293_6195387118907394115_n.jpg |
 | upload-5.jpg (Sobek) | 671134384_955492216872985_935924990703332078_n.jpg |
 
-## Clients (24 unique)
+## Clients (25 entries: 24 brands, Sisi Travel listed per branch)
 
 Card: `artwork` = file has its own background, shown whole; `light` / `dark` = transparent file on a white / black card.
 

@@ -29,6 +29,7 @@ export async function OrganizationJsonLd({ locale }: { locale: Locale }) {
         description: t("description"),
         knowsAbout: ["Travel marketing", "Tourism marketing", "Creative campaigns", "Content creation"],
         ...(site.email.placeholder ? {} : { email: site.email.value }),
+        ...(site.whatsapp.placeholder ? {} : { telephone: site.whatsapp.value.replace(/\s/g, "") }),
         ...(sameAs.length ? { sameAs } : {}),
       }}
     />
