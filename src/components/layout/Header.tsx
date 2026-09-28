@@ -209,7 +209,7 @@ export function Header({ items, cta, logo, logoLight, labels, footerNote }: Head
                           href={item.href}
                           aria-current={active ? "page" : undefined}
                           onClick={() => setOpen(false)}
-                          className="group flex items-baseline gap-4 py-1.5 font-[family-name:var(--font-display)] text-[clamp(2.25rem,10vw,4rem)] font-bold leading-[1.1] tracking-[-0.03em] rtl:tracking-normal"
+                          className="group flex items-baseline gap-4 py-1.5 font-[family-name:var(--font-display)] text-[clamp(1.75rem,7vw,2.75rem)] font-medium leading-[1.35] tracking-[-0.02em] rtl:tracking-normal"
                         >
                           <span className="t-label w-8 shrink-0 tabular-nums text-white/40">{String(i + 1).padStart(2, "0")}</span>
                           <span className={active ? "text-teal" : "transition-colors group-hover:text-teal"}>{item.label}</span>

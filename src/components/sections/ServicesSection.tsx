@@ -28,9 +28,9 @@ export async function ServicesSection({ index = "04", as = "h2" }: { index?: str
               aria-hidden="true"
               className="absolute inset-0 -z-10 origin-left scale-x-0 bg-teal transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-x-100 rtl:origin-right"
             />
-            <div className="grid gap-3 py-7 md:grid-cols-12 md:items-center md:gap-6 md:py-9 md:ps-2">
+            <div className="grid gap-3 py-6 md:grid-cols-12 md:items-center md:gap-6 md:py-7 md:ps-2">
               <span className="t-label tabular-nums text-ink-3 transition-colors group-hover:text-ink md:col-span-1">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,3.6vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.035em] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:translate-x-3 rtl:leading-[1.35] rtl:tracking-normal rtl:group-hover:-translate-x-3 md:col-span-6">
+              <h3 className="font-[family-name:var(--font-display)] text-[clamp(1.25rem,2vw,1.75rem)] font-semibold leading-[1.3] tracking-[-0.015em] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:translate-x-3 rtl:leading-[1.6] rtl:tracking-normal rtl:group-hover:-translate-x-3 md:col-span-6">
                 {s.title[locale]}
               </h3>
               <p className="max-w-md text-ink-2 transition-colors group-hover:text-ink md:col-span-4">{s.description[locale]}</p>

@@ -31,7 +31,7 @@ export async function Hero() {
           <Lines as="h1" id="hero-title" lines={lines} onLoad delay={0.15} accentIndex={2} className="t-display" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-[19rem] sm:max-w-md lg:col-span-4 lg:max-w-none lg:-ms-10">
+        <div className="relative mx-auto w-full max-w-[17rem] sm:max-w-sm lg:col-span-4 lg:me-0 lg:ms-auto lg:max-w-[24rem]">
           <HeroPostcards labels={cards} ariaLabel={t("artLabel")} />
         </div>
       </div>
@@ -41,8 +41,8 @@ export async function Hero() {
           <p className="t-lead max-w-xl text-ink-2">{t("body")}</p>
         </Reveal>
         <Reveal onLoad delay={0.85} className="flex flex-wrap items-center gap-3 lg:col-span-4">
-          <ButtonLink href="/work">{t("primary")}</ButtonLink>
-          <ButtonLink href="/contact" variant="light">{t("secondary")}</ButtonLink>
+          <ButtonLink href="/contact">{t("primary")}</ButtonLink>
+          <ButtonLink href="/clients" variant="light">{t("secondary")}</ButtonLink>
         </Reveal>
         <Reveal onLoad delay={1} className="hidden items-end justify-end gap-6 lg:col-span-3 lg:flex">
           <p className="max-w-[12rem] text-end text-sm font-medium text-ink-3">{t("aside")}</p>

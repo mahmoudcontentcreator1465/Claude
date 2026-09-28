@@ -1,9 +1,8 @@
 import "server-only";
 import type { Locale } from "@/i18n/routing";
-import { caseStudies } from "@/content/case-studies";
 import { clients } from "@/content/clients";
 import { services } from "@/content/services";
-import type { CaseStudy, Client, ContentStatus, Service } from "@/content/types";
+import type { Client, ContentStatus, Service } from "@/content/types";
 
 /**
  * Drafts (pending clients, unconfirmed services, placeholder case studies) are shown:
@@ -45,25 +44,4 @@ export function getServices(): Service[] {
 
 export function getPublishedServices(): Service[] {
   return services.filter((s) => s.status === "published").sort(byOrder);
-}
-
-export function getCaseStudies(): CaseStudy[] {
-  return caseStudies.filter((c) => isVisible(c.status)).sort(byOrder);
-}
-
-export function getCaseStudy(slug: string): CaseStudy | undefined {
-  return getCaseStudies().find((c) => c.slug === slug);
-}
-
-export function getRelatedCaseStudies(current: CaseStudy, limit = 2): CaseStudy[] {
-  const others = getCaseStudies().filter((c) => c.slug !== current.slug);
-  const scored = others
-    .map((c) => ({
-      c,
-      score:
-        (c.clientId && c.clientId === current.clientId ? 3 : 0) +
-        c.services.filter((s) => current.services.includes(s)).length,
-    }))
-    .sort((a, b) => b.score - a.score || a.c.order - b.c.order);
-  return scored.slice(0, limit).map((s) => s.c);
 }

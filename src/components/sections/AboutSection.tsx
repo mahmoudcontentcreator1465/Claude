@@ -18,7 +18,7 @@ export async function AboutSection({ index = "01", showLink = true, as = "h2" }:
 
       <div className="mt-14 grid gap-10 md:mt-20 lg:grid-cols-12">
         <Reveal onLoad={as === "h1"} delay={as === "h1" ? 0.2 : 0} className="lg:col-span-6 lg:col-start-1">
-          <p className="t-h3 font-semibold [text-wrap:pretty]">{t("lead")}</p>
+          <p className="text-[clamp(1.1875rem,1.6vw,1.4375rem)] leading-[1.65] text-ink [text-wrap:pretty] rtl:leading-[1.9]">{t("lead")}</p>
         </Reveal>
         <Reveal onLoad={as === "h1"} delay={as === "h1" ? 0.3 : 0.1} className="flex flex-col gap-8 lg:col-span-5 lg:col-start-8">
           <p className="t-lead text-ink-2 [text-wrap:pretty]">{t("body")}</p>
@@ -42,7 +42,7 @@ export async function AboutSection({ index = "01", showLink = true, as = "h2" }:
             >
               {/* Each principle is one branch of the logo's three arrows. */}
               <span className="mb-10 flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-full border border-line-strong text-sm font-bold tabular-nums transition-colors duration-500 group-hover:border-teal group-hover:bg-teal">
+                <span className="grid h-10 w-10 place-items-center rounded-full border border-line-strong text-sm font-medium tabular-nums transition-colors duration-500 group-hover:border-teal group-hover:bg-teal">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className={`h-px flex-1 origin-[inline-start] bg-ink/20 ${i === 1 ? "!bg-teal !h-[2px]" : ""}`} />

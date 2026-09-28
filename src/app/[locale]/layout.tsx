@@ -58,7 +58,6 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     { href: "/", label: t("home") },
     { href: "/about", label: t("about") },
     { href: "/clients", label: t("clients") },
-    { href: "/work", label: t("work") },
     ...(hasServices ? [{ href: "/services", label: t("services") }] : []),
     { href: "/contact", label: t("contact") },
   ];

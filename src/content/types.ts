@@ -67,50 +67,10 @@ export interface Client {
   featured: boolean;
   /** Lower numbers come first. */
   order: number;
-  /** Slugs of case studies in content/case-studies. */
-  caseStudies: string[];
   status: ContentStatus;
   /** Original upload path under src/assets/clients, kept for traceability. */
   source: string;
 }
 
-export type CaseStudyVisual =
-  | { kind: "art"; variant: ArtVariant; caption?: Localized }
-  | { kind: "image"; image: StaticImageData; alt: Localized; caption?: Localized }
-  | { kind: "video"; src: string; poster?: StaticImageData; alt: Localized; caption?: Localized }
-  | { kind: "embed"; url: string; title: Localized; caption?: Localized };
-
+/** Illustration variants used by the hero postcards and the 404 page. */
 export type ArtVariant = "coast" | "desert" | "city" | "route" | "oasis";
-
-export interface GalleryItem {
-  visual: CaseStudyVisual;
-  /** Layout hint for the gallery grid. */
-  size: "full" | "wide" | "tall" | "square";
-}
-
-export interface CaseStudy {
-  slug: string;
-  status: ContentStatus;
-  /** Id from content/clients. Leave null until the project is confirmed. */
-  clientId: string | null;
-  order: number;
-  featured: boolean;
-  year?: string;
-  title: Localized;
-  projectType: Localized;
-  services: ServiceId[];
-  summary: Localized;
-  cover: CaseStudyVisual;
-  overview: Localized;
-  challenge: Localized;
-  approach: Localized;
-  deliverables: Localized<string[]>;
-  gallery: GalleryItem[];
-  /**
-   * Only verified figures supplied by Different. The section is not rendered at all
-   * while this is undefined or empty.
-   */
-  results?: { value: string; label: Localized; source?: string }[];
-  /** Fields still waiting on real material. Shown in the draft banner. */
-  missing?: string[];
-}

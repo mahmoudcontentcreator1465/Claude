@@ -9,8 +9,6 @@
     "aboutDescription": "Different is a creative marketing agency for travel and tourism brands. Different ideas, different experiences, different results.",
     "clients": "Our clients",
     "clientsDescription": "Travel agencies, tour operators and tourism brands Different has worked with.",
-    "work": "Our work",
-    "workDescription": "Selected campaigns, content and creative projects by Different for travel and tourism brands.",
     "services": "Services",
     "servicesDescription": "How Different helps travel and tourism brands get noticed, remembered and booked.",
     "contact": "Contact",
@@ -30,7 +28,6 @@
     "home": "Home",
     "about": "About",
     "clients": "Our Clients",
-    "work": "Our Work",
     "services": "Services",
     "contact": "Contact",
     "cta": "Let's Talk"
@@ -61,8 +58,8 @@
       "to ignore."
     ],
     "body": "Creative marketing experiences that bring travel and tourism brands closer to the people they want to reach.",
-    "primary": "Explore Our Work",
-    "secondary": "Let's Talk",
+    "primary": "Let's Talk",
+    "secondary": "Meet our clients",
     "aside": "One idea. Many directions.",
     "cards": [
       "Coast",
@@ -115,37 +112,6 @@
     "viewAll": "See all clients",
     "count": "{count, plural, one {# client} other {# clients}}",
     "marqueeLabel": "Client logos"
-  },
-  "work": {
-    "kicker": "Our Work",
-    "title": "Selected work",
-    "body": "Campaigns, content and ideas made for travel brands.",
-    "view": "View project",
-    "viewAll": "See all work",
-    "emptyTitle": "Case studies are on their way.",
-    "empty": "We're preparing our projects for the web. Want to see the work now? Ask us for the portfolio.",
-    "emptyCta": "Request the portfolio",
-    "placeholderVisual": "Illustration: project visuals coming soon",
-    "clientTbc": "Client to be confirmed"
-  },
-  "caseStudy": {
-    "client": "Client",
-    "type": "Project",
-    "year": "Year",
-    "services": "Services",
-    "overview": "Overview",
-    "challenge": "The challenge",
-    "approach": "Our approach",
-    "deliverables": "What we delivered",
-    "gallery": "Visuals",
-    "results": "Results",
-    "resultsNote": "Figures supplied and verified by the client.",
-    "related": "More work",
-    "draftBanner": "Draft case study. This is a layout preview with placeholder content, not a real project.",
-    "missing": "Still needed",
-    "back": "All work",
-    "ctaTitle": "Have a destination that deserves this kind of story?",
-    "ctaButton": "Start a project"
   },
   "services": {
     "kicker": "Services",

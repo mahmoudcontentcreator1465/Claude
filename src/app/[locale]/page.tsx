@@ -6,7 +6,6 @@ import { pageMetadata } from "@/lib/seo";
 import { Hero } from "@/components/sections/Hero";
 import { WordBand } from "@/components/sections/WordBand";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { WorkSection } from "@/components/sections/WorkSection";
 import { ClientsSection } from "@/components/sections/ClientsSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -36,7 +35,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <Hero />
       <WordBand />
       <AboutSection index={next()} />
-      <WorkSection index={next()} featuredOnly />
       {clients.length >= 6 ? <LogoMarquee clients={clients} names={names} label={tcl("marqueeLabel")} /> : null}
       <ClientsSection index={next()} limit={10} />
       {hasServices ? <ServicesSection index={next()} /> : null}

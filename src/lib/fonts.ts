@@ -10,7 +10,7 @@ export const jakarta = Plus_Jakarta_Sans({
 // so they're not preloaded on English pages.
 export const alexandria = Alexandria({
   subsets: ["arabic"],
-  weight: ["700", "800"],
+  weight: ["500", "600"],
   variable: "--font-alexandria",
   display: "swap",
   preload: false,

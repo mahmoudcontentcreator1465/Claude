@@ -4,7 +4,7 @@ Bilingual (English / Arabic) portfolio site for **Different**, a creative market
 and tourism brands. Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Motion and next-intl.
 
 - `/en/...` English (LTR), `/ar/...` Arabic (RTL). `/` redirects to the visitor's language and remembers the choice.
-- Pages: Home · About · Our Clients · Our Work · Case study (`/work/[slug]`) · Services · Contact.
+- Pages: Home · About · Our Clients · Services · Contact.
 - Everything is statically generated except the contact form's server action.
 
 ## Development
@@ -37,8 +37,7 @@ All content lives in `src/content/`:
 
 | File | Holds |
 |---|---|
-| `clients.ts` | Client list: `id, slug, name{en,ar}, logo, logoAlt?, services[], featured, order, caseStudies[], status` |
-| `case-studies.ts` | Case studies, fully bilingual, with gallery and optional verified `results` |
+| `clients.ts` | Client list: `id, slug, name{en,ar}, logo, logoAlt?, services[], featured, order, status` |
 | `services.ts` | The eight proposed services, all `draft` until confirmed |
 | `site.ts` | Email, WhatsApp and social links (currently **placeholders**) |
 | `types.ts` | The types for all of the above |
@@ -60,7 +59,7 @@ adapt automatically to what's published (e.g. the Services link appears only onc
    import acmeLogo from "@/assets/clients/acme-travel.png";
    { id: "acme-travel", slug: "acme-travel", name: { en: "Acme Travel", ar: "أكمي للسياحة" },
      logo: { image: acmeLogo, treatment: "transparent-on-light" }, services: [], featured: true,
-     order: 50, caseStudies: [], status: "published", source: "acme-travel.png" }
+     order: 50, status: "published", source: "acme-travel.png" }
    ```
 3. `treatment` controls the card:
    `artwork` = file has its own background (shown whole, uncropped),
@@ -70,17 +69,6 @@ adapt automatically to what's published (e.g. the Services link appears only onc
 
 The asset inventory and open questions are in `src/assets/clients/INVENTORY.md`.
 **The client list is not final yet**: all current entries are `pending`.
-
-### Adding a case study
-
-1. Put images in `src/assets/work/<slug>/` and import them (they get width/height and blur placeholders automatically).
-2. Copy one of the entries in `src/content/case-studies.ts` and fill in every field in both languages.
-   Visuals can be `image`, `video` (`src` in `public/`), `embed` (YouTube/Vimeo/Instagram URL) or `art`.
-3. Link it to its client with `clientId`, and add its slug to that client's `caseStudies`.
-4. Only add `results` with figures the client has verified. The Results section doesn't render without them.
-5. Set `status: "published"`. The page, sitemap entry and structured data are generated at build time.
-
-The three current case studies are **placeholder templates** (`draft`), not real projects.
 
 ### Publishing services
 

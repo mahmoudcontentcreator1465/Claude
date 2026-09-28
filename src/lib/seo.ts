@@ -10,7 +10,7 @@ export function siteUrl(): string {
   return "http://localhost:3000";
 }
 
-/** Path without locale, e.g. "" for home or "/work". */
+/** Path without locale, e.g. "" for home or "/clients". */
 export function localizedUrl(locale: Locale, path: string): string {
   return `${siteUrl()}/${locale}${path}`;
 }
