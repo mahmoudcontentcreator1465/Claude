@@ -29,6 +29,10 @@ import linesLogo from "@/assets/clients/batch-2/logo.png";
 import gtaOtelLogo from "@/assets/clients/batch-2/29abb490-1d57-40ed-a508-e7518726c3b9.png";
 import exodusLogo from "@/assets/clients/batch-2/Exodus Logo 02.png";
 
+// Batch 3: sent in chat on 2026-09-28 (the chat upload renamed the files).
+import samToursLogo from "@/assets/clients/batch-3/upload-9.jpg";
+import promoToursLogo from "@/assets/clients/batch-3/upload-10.webp";
+
 /**
  * Client list, confirmed by Different on 2026-09-28 (all logos received, names approved as
  * written on each logo). Names are copied from each logo exactly; where a logo has no
@@ -304,5 +308,27 @@ export const clients: Client[] = [
     order: 240,
     status: "published",
     source: "batch-2/Exodus Logo 02.png",
+  },
+  {
+    id: "sam-tours",
+    slug: "sam-tours",
+    name: { en: "SAM Tours" },
+    logo: { image: samToursLogo, treatment: "artwork" },
+    services: [],
+    featured: true,
+    order: 250,
+    status: "published",
+    source: "batch-3/upload-9.jpg",
+  },
+  {
+    id: "promo-tours",
+    slug: "promo-tours",
+    name: { en: "Promo Tours", ar: "برومو تورز للسياحة" },
+    logo: { image: promoToursLogo, treatment: "artwork" },
+    services: [],
+    featured: true,
+    order: 260,
+    status: "published",
+    source: "batch-3/upload-10.webp",
   },
 ];
