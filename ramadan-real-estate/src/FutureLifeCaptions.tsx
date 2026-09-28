@@ -4,11 +4,10 @@ import { progress, sec } from "./lib/motion";
 import { font } from "./theme";
 
 /**
- * Future Life — برادات السبيل. Very simple bilingual captions on a
- * transparent background (render with alpha): Arabic on top in white, key
- * words in a light brand teal, English under it in white, all with a soft
- * teal/purple glow so they read over any shot. Frame 0 = 00:00:00,000 of the
- * SRT (09283).
+ * Future Life — برادات السبيل. Very simple bilingual captions on a blue
+ * screen: Arabic on top, English under it, all plain white with no glow.
+ * Words wipe in and out with clip + translate only, so every edge is solid
+ * and keys cleanly. Frame 0 = 00:00:00,000 of the SRT (09283).
  */
 
 const FL = {
@@ -172,13 +171,14 @@ const CAPS: Cap[] = [
 const END = s(60.7);
 export const FUTURE_LIFE_CAPTIONS_DURATION = END + 20;
 
-/** Light teal for the accent words, so they still glow on dark shots. */
-const TEAL_LIGHT = "#7DB8CE";
+/** Blue screen, keyed out in the edit. */
+const BLUE = "#0000FF";
 
-const glow = (color: string) =>
-  `0 0 3px rgba(54,25,83,0.7), 0 0 12px ${color}, 0 0 30px ${color}, 0 0 60px rgba(54,25,83,0.55)`;
-
-const TEAL_GLOW = "rgba(90,154,179,0.85)";
+/** Wipe in from the bottom, wipe out through the top. Solid edges only. */
+const wipe = (shown: number, out: number, rise: number) => ({
+  clipPath: `inset(${out * 100}% 0 ${(1 - shown) * 100}% 0)`,
+  translate: `0px ${(1 - shown) * rise - out * rise * 0.6}px`,
+});
 
 /** Which caption is on screen, and how far it has come in / gone out. */
 const useCaption = (frame: number) => {
@@ -195,12 +195,12 @@ const useCaption = (frame: number) => {
 export const FutureLifeCaptions: React.FC = () => {
   const frame = useCurrentFrame();
   const cur = useCaption(frame);
-  if (!cur) return <AbsoluteFill />;
+  if (!cur) return <AbsoluteFill style={{ backgroundColor: BLUE }} />;
   const { cap, out } = cur;
   const enIn = progress(frame, s(cap.at) + 4, s(cap.at) + 16);
 
   return (
-    <AbsoluteFill>
+    <AbsoluteFill style={{ backgroundColor: BLUE }}>
       <div
         dir="rtl"
         style={{
@@ -211,11 +211,9 @@ export const FutureLifeCaptions: React.FC = () => {
           display: "flex",
           justifyContent: "center",
           gap: "0.28em",
-          opacity: 1 - out,
-          translate: `0px ${-out * 16}px`,
         }}
       >
-        {cap.ar.map(([text, at, accent]) => {
+        {cap.ar.map(([text, at]) => {
           const shown = progress(frame, s(at), s(at) + 12);
           if (frame < s(at)) return null;
           return (
@@ -226,11 +224,9 @@ export const FutureLifeCaptions: React.FC = () => {
                 fontSize: 64,
                 lineHeight: 1.2,
                 whiteSpace: "nowrap",
-                color: accent ? TEAL_LIGHT : FL.white,
-                textShadow: glow(TEAL_GLOW),
-                opacity: shown,
-                translate: `0px ${(1 - shown) * 26}px`,
-                filter: `blur(${(1 - shown) * 6}px)`,
+                color: FL.white,
+                display: "inline-block",
+                ...wipe(shown, out, 30),
               }}
             >
               {text}
@@ -253,10 +249,7 @@ export const FutureLifeCaptions: React.FC = () => {
           lineHeight: 1.2,
           whiteSpace: "nowrap",
           color: FL.white,
-          textShadow: glow(TEAL_GLOW),
-          opacity: enIn * (1 - out),
-          translate: `0px ${(1 - enIn) * 18 - out * 16}px`,
-          filter: `blur(${(1 - enIn) * 5}px)`,
+          ...wipe(enIn, out, 20),
         }}
       >
         {cap.en}

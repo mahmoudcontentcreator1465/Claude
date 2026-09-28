@@ -149,19 +149,13 @@
 ملاحظة: الـ SRT مكرر فيه "في القاهرة" (سطر 20 و21)، واتكتبت مرة واحدة بس.
 
 ### فيديو 10 — Future Life: برادات السبيل (SRT 09283)
-كابشنز بسيطة جداً **بخلفية شفافة (alpha) وحوالين الكلام glow** (بطلب المستخدم، من غير جرين ومن غير أي خلفية). فوق سطر عربي أبيض، والكلمات المهمة فيه تيل فاتح `#7DB8CE`. تحته سطر إنجليزي أبيض بـ Inter Tight. الـ glow عبارة عن `textShadow`: هالة بنفسجي `#361953` قريبة من الكلام، وبعدها تيل `#5A9AB3`. الحركة fade مع طلوع لفوق وشوية blur، ومفيش clip عشان الـ glow مايتقصش. الكود في `src/FutureLifeCaptions.tsx`، وكل جملة في `CAPS` فيها العربي والترجمة.
+كابشنز بسيطة جداً على **بلو اسكرين `#0000FF`** (آخر طلب من المستخدم). الكلام كله أبيض، ومن غير glow ولا ظل ولا أي خلفية ورا الكلام. فوق سطر عربي بـ Lifta Swash، وتحته سطر إنجليزي بـ Inter Tight. الحركة wipe بـ clip وtranslate بس، بتدخل من تحت وبتخرج من فوق، ومفيش opacity ولا blur عشان الحواف تفضل صلبة والـ key يطلع نضيف. الكود في `src/FutureLifeCaptions.tsx`، وكل جملة في `CAPS` فيها العربي والترجمة.
 
-الرندر بـ alpha:
-```
-npx remotion render FutureLifeCaptions <dir> --sequence --image-format=png   # PNG lossless
-FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
-$FF -framerate 30 -i <dir>/element-%04d.png -c:v libvpx-vp9 -pix_fmt yuva420p -b:v 1M -auto-alt-ref 0 out.webm   # 8.8MB
-$FF -framerate 30 -start_number N -i <dir>/element-%04d.png -frames:v 460 -c:v qtrle -g 900 -pix_fmt argb partK.mov
-```
-- `renders/futurelife-sabeel-captions-alpha.webm`: ملف واحد، يتحط عند 00:00.
-- `renders/futurelife-captions-alpha-part1..4.mov`: QuickTime Animation، كل جزء 460 فريم. بتتحط عند 00:00 و15.333 و30.667 و46.000. اتقسمت لأن الملف كامل 85MB وحد الإرسال 30MB.
-- ProRes 4444 طلع 700MB، وHEVC بـ alpha محتاج ffmpeg 7.1 والموجود 7.0.
+| Composition | ملف | يتحط عند |
+|---|---|---|
+| `FutureLifeCaptions` | `futurelife-sabeel-captions-bluescreen.mp4` (61.4ث) | 00:00 |
 
+تاريخ الطلب: كبسولة بيضا، وبعدها من غير خلفية على جرين، وبعدها شفاف بـ glow، وفي الآخر بلو اسكرين أبيض سادة. ملفات الشفاف اتشالت.
 ملاحظات: الأسماء الإنجليزي "Rewaq Ousha Bint Hussain Cultural Centre" و"Sabeel Water Coolers" ترجمة مني ومحتاجة تأكيد.
 
 ## قواعد الجرين اسكرين
