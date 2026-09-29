@@ -20,21 +20,23 @@ import { font, ink, paper, red, shadow } from "./theme";
  *   6 AskFirstFull    full   00:24.600  "قبل ما تسأل المتر بكام… يكمل ويسلّم؟"
  */
 
-const border = "rgba(20,16,15,0.10)";
+export const border = "rgba(20,16,15,0.10)";
 
 /* ------------------------------------------------------------------------ */
 /* Green-screen helpers                                                     */
 /* ------------------------------------------------------------------------ */
 
-const G = { left: 56, top: 186, width: 848, height: 250 };
+export const G = { left: 56, top: 186, width: 848, height: 250 };
 
-const Top: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+export const Top: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div style={{ position: "absolute", left: 56, right: 56, top: 50 }}>
     {children}
   </div>
 );
 
-const Strip: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+export const Strip: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => (
   <div
     style={{
       position: "absolute",
@@ -50,7 +52,7 @@ const Strip: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 /** White tile with an icon and optional label; red border when it's the point. */
-const Tile: React.FC<{
+export const Tile: React.FC<{
   frame: number;
   at: number;
   icon: React.ReactNode;
@@ -102,7 +104,7 @@ const Tile: React.FC<{
 };
 
 /** Short grey text lines, like a document's body. */
-const Lines: React.FC<{ widths: number[]; draw?: number }> = ({
+export const Lines: React.FC<{ widths: number[]; draw?: number }> = ({
   widths,
   draw = 1,
 }) => (
@@ -124,7 +126,7 @@ const Lines: React.FC<{ widths: number[]; draw?: number }> = ({
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 
 /** Small red round badge with an icon (check, alert…). */
-const Badge: React.FC<{
+export const Badge: React.FC<{
   shown: number;
   icon: React.ReactNode;
   size?: number;
@@ -150,7 +152,7 @@ const Badge: React.FC<{
   </div>
 );
 
-const alert = (
+export const alert = (
   <>
     <path d="M12 7v6" />
     <path d="M12 17h.01" />
@@ -322,7 +324,7 @@ const B = {
 export const DIRECTIVES_FULL_DURATION = B.end;
 
 /** Floating paper card with the house's long soft shadow. */
-const FloatCard: React.FC<{
+export const FloatCard: React.FC<{
   frame: number;
   at: number;
   phase: number;
@@ -374,7 +376,7 @@ const FloatCard: React.FC<{
   );
 };
 
-const Title: React.FC<{
+export const Title: React.FC<{
   frame: number;
   at: number;
   size?: number;

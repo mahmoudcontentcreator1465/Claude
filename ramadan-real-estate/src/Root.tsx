@@ -1,4 +1,6 @@
 import { Composition, Folder } from "remotion";
+import { SAHEL_EXIT_DURATION, SahelExit } from "./SahelExit";
+import { SAHEL_SALES_DURATION, SahelSales } from "./SahelSales";
 import {
   NewsHookGreen,
   NEWS_HOOK_GREEN_DURATION,
@@ -340,6 +342,24 @@ export const RemotionRoot: React.FC = () => {
           id="AskFirstFull"
           component={AskFirstFull}
           durationInFrames={ASK_FIRST_FULL_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+      </Folder>
+      <Folder name="Sahel">
+        <Composition
+          id="SahelExit"
+          component={SahelExit}
+          durationInFrames={SAHEL_EXIT_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="SahelSales"
+          component={SahelSales}
+          durationInFrames={SAHEL_SALES_DURATION}
           fps={FPS}
           width={canvas.width}
           height={canvas.height}
