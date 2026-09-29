@@ -1,5 +1,19 @@
 import { Composition, Folder } from "remotion";
 import {
+  NewsHookGreen,
+  NEWS_HOOK_GREEN_DURATION,
+  DirectivesFull,
+  DIRECTIVES_FULL_DURATION,
+  LawGreen,
+  LAW_GREEN_DURATION,
+  BankDataFull,
+  BANK_DATA_FULL_DURATION,
+  SortGreen,
+  SORT_GREEN_DURATION,
+  AskFirstFull,
+  ASK_FIRST_FULL_DURATION,
+} from "./MarketNews";
+import {
   FUTURE_LIFE_CAPTIONS_DURATION,
   FutureLifeCaptions,
 } from "./FutureLifeCaptions";
@@ -276,6 +290,56 @@ export const RemotionRoot: React.FC = () => {
           id="FutureLifeCaptions"
           component={FutureLifeCaptions}
           durationInFrames={FUTURE_LIFE_CAPTIONS_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+      </Folder>
+      <Folder name="MarketNews">
+        <Composition
+          id="NewsHookGreen"
+          component={NewsHookGreen}
+          durationInFrames={NEWS_HOOK_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="DirectivesFull"
+          component={DirectivesFull}
+          durationInFrames={DIRECTIVES_FULL_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="LawGreen"
+          component={LawGreen}
+          durationInFrames={LAW_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="BankDataFull"
+          component={BankDataFull}
+          durationInFrames={BANK_DATA_FULL_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="SortGreen"
+          component={SortGreen}
+          durationInFrames={SORT_GREEN_DURATION}
+          fps={FPS}
+          width={canvas.width}
+          height={canvas.height}
+        />
+        <Composition
+          id="AskFirstFull"
+          component={AskFirstFull}
+          durationInFrames={ASK_FIRST_FULL_DURATION}
           fps={FPS}
           width={canvas.width}
           height={canvas.height}
