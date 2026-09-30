@@ -1,7 +1,13 @@
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import "./fonts";
 import { SfxTrack, type Sfx } from "./hajj/sfx";
-import { GreenCard, Headline, type Slide } from "./lib/greenscreen";
+import {
+  CARD,
+  CHROMA,
+  GreenCard,
+  Headline,
+  type Slide,
+} from "./lib/greenscreen";
 import { Icon, paths } from "./lib/Icon";
 import { Kicker } from "./lib/Kicker";
 import { clamp, progress } from "./lib/motion";
@@ -15,6 +21,13 @@ import { font, ink, paper, red } from "./theme";
  * <Sequence>, so frames inside are local to the segment.
  */
 
+/**
+ * Size and height of the green-screen card in these reels: a bit smaller than
+ * the standard lower third and lifted off the bottom (user's request).
+ */
+const CARD_SCALE = 0.82;
+const CARD_LIFT = 190;
+
 /** Green-screen segment: card in, headline slides, graphic strip, card out. */
 export const GreenSeg: React.FC<{
   len: number;
@@ -25,19 +38,29 @@ export const GreenSeg: React.FC<{
 }> = ({ len, tabs, slides, sfx = [], children }) => {
   const frame = useCurrentFrame();
   return (
-    <GreenCard frame={frame} tabs={tabs} outFrom={len - 16} outTo={len - 1}>
-      <Top>
-        <Headline frame={frame} slides={slides} />
-      </Top>
-      <Strip>{children(frame)}</Strip>
-      <SfxTrack
-        cues={[
-          { at: 0, name: "whoosh", volume: 0.6 },
-          ...sfx,
-          { at: len - 16, name: "whoosh", volume: 0.45 },
-        ]}
-      />
-    </GreenCard>
+    <AbsoluteFill style={{ backgroundColor: CHROMA }}>
+      <AbsoluteFill
+        style={{
+          transformOrigin: `50% ${CARD.top + CARD.height / 2}px`,
+          scale: String(CARD_SCALE),
+          translate: `0px ${-CARD_LIFT}px`,
+        }}
+      >
+        <GreenCard frame={frame} tabs={tabs} outFrom={len - 16} outTo={len - 1}>
+          <Top>
+            <Headline frame={frame} slides={slides} />
+          </Top>
+          <Strip>{children(frame)}</Strip>
+          <SfxTrack
+            cues={[
+              { at: 0, name: "whoosh", volume: 0.6 },
+              ...sfx,
+              { at: len - 16, name: "whoosh", volume: 0.45 },
+            ]}
+          />
+        </GreenCard>
+      </AbsoluteFill>
+    </AbsoluteFill>
   );
 };
 
